@@ -2,14 +2,7 @@ import { Container } from "react-bootstrap";
 import styles from "./footer.module.scss";
 import Link from "next/link";
 import { FiFacebook } from "react-icons/fi";
-import {
-  FaEnvelope,
-  FaInstagram,
-  FaLinkedinIn,
-  FaMapMarkerAlt,
-  FaPhoneAlt,
-  FaWhatsapp,
-} from "react-icons/fa";
+import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import NextImage from "@/hooks/NextImage";
 import { usePathname } from "next/navigation";
