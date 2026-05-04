@@ -1,16 +1,20 @@
 import styles from "./product-card.module.scss";
 import NextImage from "@/hooks/NextImage";
 
-type Product = {
+export type Product = {
   id: number;
   name: string;
   price: number;
   oldPrice?: number;
   image: string;
-  category: string;
+  category?: string; // ✅ optional (merged data ke liye)
 };
 
-export default function ProductCard({ product }: { product: Product }) {
+type Props = {
+  product: Product;
+};
+
+export default function ProductCard({ product }: Props) {
   return (
     <div className={styles.card}>
       <div className={styles.imageWrapper}>
@@ -19,16 +23,23 @@ export default function ProductCard({ product }: { product: Product }) {
           alt={product.name}
           className={styles.image}
         />
-        <button className={styles.btn}>Add to Cart</button>
+        {product.category && (
+          <span className={styles.badge}>{product.category}</span>
+        )}
+
+        <button className={styles.btn}>Find Local Store</button>
       </div>
 
       <div className={styles.content}>
         <h3 className={styles.title}>{product.name}</h3>
 
         <div className={styles.priceBox}>
-          <span className={styles.price}>${product.price}</span>
-          {product.oldPrice && (
-            <span className={styles.oldPrice}>${product.oldPrice}</span>
+          <span className={styles.price}>${product.price.toFixed(2)}</span>
+
+          {product.oldPrice !== undefined && (
+            <span className={styles.oldPrice}>
+              ${product.oldPrice.toFixed(2)}
+            </span>
           )}
         </div>
       </div>
