@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./header.module.scss";
 import { Container } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NextImage from "@/hooks/NextImage";
 import Head from "next/head";
 import { usePathname } from "next/navigation";
@@ -9,9 +9,25 @@ import { navItems } from "@/constants/navMenu";
 import { IoSearch } from "react-icons/io5";
 import { FaRegHeart, FaRegUser } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
+import { RiMenu2Line } from "react-icons/ri";
+import { FaXmark } from "react-icons/fa6";
 export default function Header() {
   const [show, setShow] = useState(false);
   const pathname = usePathname();
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 1199);
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const toggleClass = () => {
     setShow((prevState) => !prevState);
@@ -45,58 +61,76 @@ export default function Header() {
         <div className={styles.wrapper}>
           <Container className={styles.container}>
             <div className={styles.nav}>
-              <div className={styles.search}>
-                <IoSearch />
+              <div className={styles.menuIconsLeft}>
+                <ul className={styles.iconList}>
+                  <li className={styles.hamMenu} onClick={toggleClass}>
+                    <RiMenu2Line />
+                  </li>
+                  <li>
+                    <IoSearch />
+                  </li>
+                </ul>
               </div>
-              <ul className={`${show ? styles.show : ""} ${styles.menu}`}>
-                {navItems.slice(0, 2).map((item) => {
-                  const isActive = pathname === item.href;
 
-                  return (
-                    <li
-                      key={item.href}
-                      className={styles.navItem}
-                      onClick={toggleClass}
-                    >
-                      <Link
-                        href={item.href}
-                        className={`${styles.navLink} ${
-                          isActive ? styles.active : ""
-                        }`}
+              <div className={`${show ? styles.show : ""} ${styles.menuLeft} `}>
+                <div className={styles.menuTitle}>
+                  <h4>Menu</h4>
+                  <div className={styles.crossIcon} onClick={toggleClass}>
+                    <FaXmark />
+                  </div>
+                </div>
+                <ul className={` ${styles.menuList}`}>
+                  {(isMobile ? navItems : navItems.slice(0, 2)).map((item) => {
+                    const isActive = pathname === item.href;
+
+                    return (
+                      <li
+                        key={item.href}
+                        className={styles.navItem}
+                        onClick={toggleClass}
                       >
-                        {item.label}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
+                        <Link
+                          href={item.href}
+                          className={`${styles.navLink} ${
+                            isActive ? styles.active : ""
+                          }`}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
               <div className={styles.logo}>
                 <Link className={styles.navLink} href="/">
                   <NextImage src={"/images/logo.jpg"} alt={""} />
                 </Link>
               </div>
-              <ul className={`${show ? styles.show : ""} ${styles.menu}`}>
-                {navItems.slice(2, 4).map((item) => {
-                  const isActive = pathname === item.href;
+              <div className={styles.menuRight}>
+                <ul className={styles.menuList}>
+                  {navItems.slice(2, 4).map((item) => {
+                    const isActive = pathname === item.href;
 
-                  return (
-                    <li
-                      key={item.href}
-                      className={styles.navItem}
-                      onClick={toggleClass}
-                    >
-                      <Link
-                        href={item.href}
-                        className={`${styles.navLink} ${
-                          isActive ? styles.active : ""
-                        }`}
+                    return (
+                      <li
+                        key={item.href}
+                        className={styles.navItem}
+                        onClick={toggleClass}
                       >
-                        {item.label}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
+                        <Link
+                          href={item.href}
+                          className={`${styles.navLink} ${
+                            isActive ? styles.active : ""
+                          }`}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
               <div className={styles.menuIcons}>
                 <ul className={styles.iconList}>
                   <li>
