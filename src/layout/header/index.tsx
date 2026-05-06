@@ -72,10 +72,13 @@ export default function Header() {
                 </ul>
               </div>
 
-              <div className={`${show ? styles.show : ""} ${styles.menuLeft} `}>
+              <div
+                className={`${show ? styles.show : ""} ${styles.menuLeft} `}
+                onClick={toggleClass}
+              >
                 <div className={styles.menuTitle}>
                   <h4>Menu</h4>
-                  <div className={styles.crossIcon} onClick={toggleClass}>
+                  <div className={styles.crossIcon}>
                     <FaXmark />
                   </div>
                 </div>

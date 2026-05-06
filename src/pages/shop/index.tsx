@@ -8,8 +8,11 @@ import Head from "next/head";
 import Header from "@/layout/header";
 import Footer from "@/layout/footer";
 import NextImage from "@/hooks/NextImage";
+import { RiMenu3Fill } from "react-icons/ri";
+import { FaXmark } from "react-icons/fa6";
 
 export default function ShopPage() {
+  const [show, setShow] = useState(false);
   // ✅ flatten products
   const allProducts = meatCategories.flatMap((cat) =>
     cat.products.map((p) => ({
@@ -20,6 +23,10 @@ export default function ShopPage() {
 
   const [selected, setSelected] = useState<string[]>([]);
   const [sort, setSort] = useState("default"); // ✅ FIX
+
+  const toggleClass = () => {
+    setShow((prevState) => !prevState);
+  };
 
   const toggleCategory = (label: string) => {
     setSelected((prev) =>
@@ -43,7 +50,7 @@ export default function ShopPage() {
   return (
     <>
       <Head>
-        <title>Shop |Koshaix</title>
+        <title>Shop | Koshaix</title>
       </Head>
       <Header />
       <main className={styles.main}>
@@ -58,39 +65,56 @@ export default function ShopPage() {
           <Container>
             <div className={styles.wrapper}>
               {/* SIDEBAR */}
-              <aside className={styles.sidebar}>
-                <h3>PRODUCT CATEGORIES</h3>
+              <aside
+                className={`${show ? styles.show : ""} ${styles.sidebar} `}
+                onClick={toggleClass}
+              >
+                <div className={styles.sidebarWrapper}>
+                  <div className={styles.title}>
+                    <h3>PRODUCT CATEGORIES</h3>
+                    <div className={styles.crossIcon}>
+                      <FaXmark />
+                    </div>
+                  </div>
 
-                {meatCategories.map((cat) => (
-                  <label key={cat.id} className={styles.filterItem}>
-                    <input
-                      type="checkbox"
-                      checked={selected.includes(cat.label)}
-                      onChange={() => toggleCategory(cat.label)}
-                    />
-                    {cat.label} ({cat.products.length})
-                  </label>
-                ))}
+                  <div className={styles.categories}>
+                    {meatCategories.map((cat) => (
+                      <label key={cat.id} className={styles.filterItem}>
+                        <input
+                          type="checkbox"
+                          checked={selected.includes(cat.label)}
+                          onChange={() => toggleCategory(cat.label)}
+                        />
+                        {cat.label} ({cat.products.length})
+                      </label>
+                    ))}
+                  </div>
+                </div>
               </aside>
 
               {/* CONTENT */}
               <div className={styles.content}>
                 {/* TOP BAR */}
                 <div className={styles.topBar}>
-                  <p>
+                  <p className={styles.showitems}>
                     Showing {sortedProducts.length} of {allProducts.length}{" "}
                     results
                   </p>
 
-                  <select
-                    className={styles.sort}
-                    value={sort}
-                    onChange={(e) => setSort(e.target.value)}
-                  >
-                    <option value="default">Default sorting</option>
-                    <option value="low">Price low to high</option>
-                    <option value="high">Price high to low</option>
-                  </select>
+                  <div className={styles.filters}>
+                    <select
+                      className={styles.sort}
+                      value={sort}
+                      onChange={(e) => setSort(e.target.value)}
+                    >
+                      <option value="default">Default sorting</option>
+                      <option value="low">Price low to high</option>
+                      <option value="high">Price high to low</option>
+                    </select>
+                    <div className={styles.catHam} onClick={toggleClass}>
+                      <RiMenu3Fill />
+                    </div>
+                  </div>
                 </div>
 
                 {/* GRID */}

@@ -26,6 +26,10 @@
         height: 220px;
         background: #f9f9f9;
 
+        @media(max-width:$sm) {
+            height: 180px;
+        }
+
         .image {
             object-fit: cover;
             transition: 0.4s ease;
@@ -87,12 +91,20 @@
             font-size: 18px;
             font-weight: 700;
             color: $primary;
+
+            @media(max-width:$sm) {
+                font-size: 16px;
+            }
         }
 
         .oldPrice {
             font-size: 14px;
             text-decoration: line-through;
             color: #999;
+
+            @media(max-width:$sm) {
+                font-size: 14px;
+            }
         }
 
         .title {
@@ -100,6 +112,10 @@
             font-weight: 600;
             margin-bottom: 10px;
             color: #222;
+
+            @media(max-width:$sm) {
+                font-size: 14px;
+            }
         }
 
 
