@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./product-card.module.scss";
 import NextImage from "@/hooks/NextImage";
 
@@ -26,8 +27,9 @@ export default function ProductCard({ product }: Props) {
         {product.category && (
           <span className={styles.badge}>{product.category}</span>
         )}
-
-        <button className={styles.btn}>Find Local Store</button>
+        <Link href={`/shop/${product.id}`}>
+          <button className={styles.btn}>Find Local Store</button>
+        </Link>
       </div>
 
       <div className={styles.content}>
