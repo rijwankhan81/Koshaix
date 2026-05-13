@@ -8,13 +8,13 @@ import { usePathname } from "next/navigation";
 import { navItems } from "@/constants/navMenu";
 import { IoSearch } from "react-icons/io5";
 import { FaRegHeart, FaRegUser } from "react-icons/fa";
-import { FiShoppingCart } from "react-icons/fi";
 import { RiMenu2Line } from "react-icons/ri";
 import { FaXmark } from "react-icons/fa6";
+import { useWishlist } from "@/context/WishlistContext";
 export default function Header() {
   const [show, setShow] = useState(false);
   const pathname = usePathname();
-
+  const { wishlist } = useWishlist();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -139,11 +139,14 @@ export default function Header() {
                   <li>
                     <FaRegUser />
                   </li>
-                  <li>
-                    <FaRegHeart />
-                  </li>
-                  <li>
-                    <FiShoppingCart />
+                  <li className={styles.wishlistItem}>
+                    <Link href="/wishlist">
+                      <FaRegHeart />
+
+                      {wishlist.length > 0 && (
+                        <span className={styles.badge}>{wishlist.length}</span>
+                      )}
+                    </Link>
                   </li>
                 </ul>
               </div>
