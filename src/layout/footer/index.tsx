@@ -31,12 +31,12 @@ export default function Footer() {
               <h3>Categories</h3>
               <ul>
                 {meatCategories.map((item: { href: string; label: string }) => {
-                  const isActive = pathname === item.href;
+                  const isActive = pathname === `/shop?category=${item.label}`;
 
                   return (
-                    <li key={item.href} className={styles.navItem}>
+                    <li key={item.label} className={styles.navItem}>
                       <Link
-                        href={item.href}
+                        href={`/shop?category=${item.label}`}
                         className={`${styles.nav_link} ${
                           isActive ? styles.active : ""
                         }`}

@@ -11,11 +11,17 @@ import { FaRegHeart, FaRegUser } from "react-icons/fa";
 import { RiMenu2Line } from "react-icons/ri";
 import { FaXmark } from "react-icons/fa6";
 import { useWishlist } from "@/context/WishlistContext";
+import { useRouter } from "next/router";
+import { meatCategories } from "@/constants/meatCategories";
 export default function Header() {
   const [show, setShow] = useState(false);
   const pathname = usePathname();
   const { wishlist } = useWishlist();
   const [isMobile, setIsMobile] = useState(false);
+  const [search, setSearch] = useState("");
+  const [showSearch, setShowSearch] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     const handleResize = () => {
@@ -31,6 +37,35 @@ export default function Header() {
 
   const toggleClass = () => {
     setShow((prevState) => !prevState);
+  };
+
+  //  ALL PRODUCTS
+  const allProducts = meatCategories.flatMap((cat) =>
+    cat.products.map((p) => ({
+      ...p,
+      category: cat.label,
+    })),
+  );
+
+  //  SEARCH SUGGESTIONS
+  const suggestions =
+    search.trim().length > 0
+      ? allProducts
+          .filter((product) =>
+            product.name.toLowerCase().includes(search.toLowerCase()),
+          )
+          .slice(0, 5)
+      : [];
+
+  //  SUBMIT
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!search.trim()) return;
+
+    router.push(`/shop?search=${encodeURIComponent(search)}`);
+
+    setShowSearch(false);
   };
 
   return (
@@ -66,9 +101,62 @@ export default function Header() {
                   <li className={styles.hamMenu} onClick={toggleClass}>
                     <RiMenu2Line />
                   </li>
-                  <li>
+                  {/* SEARCH ICON */}
+                  <li
+                    className={styles.searchIcon}
+                    onClick={() => setShowSearch((prev) => !prev)}
+                  >
                     <IoSearch />
                   </li>
+
+                  {/* SEARCH BAR */}
+                  {showSearch && (
+                    <div className={styles.searchBar}>
+                      {/* FORM */}
+                      <form onSubmit={handleSearch}>
+                        <input
+                          type="text"
+                          placeholder="Search meat products..."
+                          value={search}
+                          onChange={(e) => setSearch(e.target.value)}
+                        />
+
+                        <button type="submit">
+                          <IoSearch />
+                        </button>
+                      </form>
+
+                      {/* SUGGESTIONS */}
+                      {suggestions.length > 0 && (
+                        <div className={styles.suggestions}>
+                          {suggestions.map((item) => (
+                            <Link
+                              key={item.id}
+                              href={`/shop/${item.id}`}
+                              className={styles.suggestionItem}
+                              onClick={() => setShowSearch(false)}
+                            >
+                              {/* IMAGE */}
+                              <div className={styles.suggestionImage}>
+                                <NextImage
+                                  src={item.image}
+                                  alt={item.name}
+                                  className={styles.image}
+                                />
+                              </div>
+
+                              {/* CONTENT */}
+                              <div className={styles.suggestionContent}>
+                                <h4>{item.name}</h4>
+
+                                <p>${item.price.toFixed(2)}</p>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </ul>
               </div>
 
