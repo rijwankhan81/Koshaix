@@ -30,7 +30,7 @@ export default function ShopPage() {
   // PAGINATION
   const [currentPage, setCurrentPage] = useState(1);
 
-  const productsPerPage = 6;
+  const productsPerPage = 8;
 
   // FLATTEN PRODUCTS
   const allProducts = meatCategories.flatMap((cat) =>

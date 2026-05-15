@@ -20,6 +20,7 @@ export const meatCategories = [
       },
     ],
   },
+
   {
     id: 2,
     label: "Chicken",
@@ -41,14 +42,23 @@ export const meatCategories = [
       },
     ],
   },
+
   {
     id: 3,
     label: "Lamb",
     slug: "lamb",
     href: "/category/lamb",
     image: "/images/categories/lamb.jpg",
-    products: [],
+    products: [
+      {
+        id: 9,
+        name: "Fresh Lamb Leg",
+        price: 289.5,
+        image: "/images/products/lamb-leg.png",
+      },
+    ],
   },
+
   {
     id: 4,
     label: "Mutton",
@@ -77,29 +87,53 @@ export const meatCategories = [
       },
     ],
   },
+
   {
     id: 5,
     label: "Turkey",
     slug: "turkey",
     href: "/category/turkey",
     image: "/images/categories/turkey.jpg",
-    products: [],
+    products: [
+      {
+        id: 10,
+        name: "Whole Turkey Fresh",
+        price: 499.99,
+        image: "/images/products/turkey-whole.png",
+      },
+    ],
   },
+
   {
     id: 6,
     label: "Duck",
     slug: "duck",
     href: "/category/duck",
     image: "/images/categories/duck.jpg",
-    products: [],
+    products: [
+      {
+        id: 11,
+        name: "Fresh Duck Breast",
+        price: 275.45,
+        image: "/images/products/duck-breast.png",
+      },
+    ],
   },
+
   {
     id: 7,
     label: "Seafood",
     slug: "seafood",
     href: "/category/seafood",
     image: "/images/categories/seafood.jpg",
-    products: [],
+    products: [
+      {
+        id: 12,
+        name: "Atlantic Salmon Fillet",
+        price: 420.75,
+        image: "/images/products/salmon-fillet.png",
+      },
+    ],
   },
 
   {
@@ -114,7 +148,6 @@ export const meatCategories = [
         name: "Fresh Sausages",
         price: 822.1,
         image: "/images/products/sausages.png",
-        category: "processed",
       },
     ],
   },
