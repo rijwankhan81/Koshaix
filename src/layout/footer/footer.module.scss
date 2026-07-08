@@ -69,14 +69,14 @@
                 }
 
                 img {
-                    width: 200px;
+                    width: 160px;
                     height: auto;
                     background: #ffffff;
-                    padding: 10px;
+
                     border-radius: 8px;
 
                     @media(max-width:$md) {
-                        width: 160px;
+                        width: 100px;
                     }
                 }
             }

@@ -1,6 +1,6 @@
 export const navItems = [
-  { label: "About", href: "/about" },
-  { label: "Shop", href: "/shop" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
+  { label: "About", labelBn: "আমাদের সম্পর্কে", href: "/about" },
+  { label: "Shop", labelBn: "কিনুন", href: "/shop" },
+  { label: "Blog", labelBn: "ব্লগ", href: "/blog" },
+  { label: "Contact", labelBn: "যোগাযোগ", href: "/contact" },
 ];

@@ -9,9 +9,10 @@ import { usePathname } from "next/navigation";
 import { navItems } from "@/constants/navMenu";
 import { meatCategories } from "@/constants/meatCategories";
 import { legalItems } from "@/constants/legal";
+import { useLanguage } from "@/context/LanguageContext";
 export default function Footer() {
   const pathname = usePathname();
-
+  const { t } = useLanguage();
   return (
     <>
       <footer className={styles.footer}>
@@ -23,33 +24,42 @@ export default function Footer() {
               </Link>
 
               <p>
-                Premium quality meat delivered hygienically to your doorstep.
-                Koshaix brings farm-fresh cuts with unmatched quality and care.
+                {t(
+                  "Premium quality meat delivered hygienically to your doorstep.",
+                  "প্রিমিয়াম কুয়ালিটির মাংস হাইজিনিকভাবে আপনার ডেস্কটপে পরিহার করা হয়।",
+                )}
+                {t(
+                  "Koshaix brings farm-fresh cuts with unmatched quality and care.",
+                  "কোশাইক্স অপময়তা এবং দয়ার সাথে ফার্ম-ফ্রেশ কাটগুলি আনে।",
+                )}
               </p>
             </div>
             <div className={styles.footer_menu}>
-              <h3>Categories</h3>
+              <h3>{t("Categories", "বিভাগ")}</h3>
               <ul>
-                {meatCategories.map((item: { href: string; label: string }) => {
-                  const isActive = pathname === `/shop?category=${item.label}`;
+                {meatCategories.map(
+                  (item: { href: string; label: string; labelBn: string }) => {
+                    const isActive =
+                      pathname === `/shop?category=${item.label}`;
 
-                  return (
-                    <li key={item.label} className={styles.navItem}>
-                      <Link
-                        href={`/shop?category=${item.label}`}
-                        className={`${styles.nav_link} ${
-                          isActive ? styles.active : ""
-                        }`}
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  );
-                })}
+                    return (
+                      <li key={item.label} className={styles.navItem}>
+                        <Link
+                          href={`/shop?category=${item.label}`}
+                          className={`${styles.nav_link} ${
+                            isActive ? styles.active : ""
+                          }`}
+                        >
+                          {t(item.label, item.labelBn)}
+                        </Link>
+                      </li>
+                    );
+                  },
+                )}
               </ul>
             </div>
             <div className={styles.footer_menu}>
-              <h3>About Us</h3>
+              <h3>{t("About Us", "আমাদের সম্পর্কে")}</h3>
               <ul>
                 {navItems.map((item) => {
                   const isActive = pathname === item.href;
@@ -62,7 +72,7 @@ export default function Footer() {
                           isActive ? styles.active : ""
                         }`}
                       >
-                        {item.label}
+                        {t(item.label, item.labelBn)}
                       </Link>
                     </li>
                   );
@@ -71,30 +81,35 @@ export default function Footer() {
             </div>
 
             <div className={styles.footer_menu}>
-              <h3>Account</h3>
+              <h3>{t("Account", "অ্যাকাউন্ট")}</h3>
               <ul>
-                {legalItems.map((item: { href: string; label: string }) => {
-                  const isActive = pathname === item.href;
+                {legalItems.map(
+                  (item: { href: string; label: string; labelBn: string }) => {
+                    const isActive = pathname === item.href;
 
-                  return (
-                    <li key={item.href} className={styles.navItem}>
-                      <Link
-                        href={item.href}
-                        className={`${styles.nav_link} ${
-                          isActive ? styles.active : ""
-                        }`}
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  );
-                })}
+                    return (
+                      <li key={item.href} className={styles.navItem}>
+                        <Link
+                          href={item.href}
+                          className={`${styles.nav_link} ${
+                            isActive ? styles.active : ""
+                          }`}
+                        >
+                          {t(item.label, item.labelBn)}
+                        </Link>
+                      </li>
+                    );
+                  },
+                )}
               </ul>
             </div>
           </div>
           <div className={styles.footer_bootom}>
             <p className={styles.copyright}>
-              © 2026 Koshaix. All rights reserved.
+              {t(
+                "© 2026 Koshaix. All rights reserved.",
+                "© 2026 কোশাইক্স। সব অধিকার সংরক্ষিত।",
+              )}
             </p>
             <div className={styles.connect}>
               <ul>

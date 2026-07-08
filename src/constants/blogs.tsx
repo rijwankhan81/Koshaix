@@ -1,9 +1,13 @@
 export type BlogPost = {
   id: string;
   title: string;
+  titleBn?: string;
   category: string;
+  categoryBn?: string;
   excerpt: string;
+  excerptBn?: string;
   content: string; // HTML content
+  contentBn?: string; // HTML content in Bangla
   author: string;
   date: string; // ISO e.g. "2025-10-12"
   formattedDate?: string; // generated in getStaticProps
@@ -15,9 +19,13 @@ export const blogPosts: BlogPost[] = [
   {
     id: "1",
     title: "Premium Fresh Meat Delivered Daily",
+    titleBn: "প্রিমিয়াম ফ্রেশ মিট ডেলিভারি প্রতিদিন",
     category: "Meat",
+    categoryBn: "মাংস",
     excerpt:
       "Discover premium farm-fresh meat delivered directly to your doorstep every day.",
+    excerptBn:
+      "প্রতিদিন আপনার দরজায় সরাসরি প্রিমিয়াম ফার্ম-ফ্রেশ মাংস ডেলিভারি করুন।",
     content: `
       <p>
         We provide high-quality fresh meat sourced directly from trusted farms and local suppliers.
@@ -29,6 +37,7 @@ export const blogPosts: BlogPost[] = [
         Freshness, hygiene, and premium quality are our top priorities to ensure the best experience.
       </p>
     `,
+    contentBn: ``,
     author: "Admin",
     date: "2026-04-20",
     image: "/images/blog/premium-fresh-meat.jpg",
@@ -38,9 +47,14 @@ export const blogPosts: BlogPost[] = [
   {
     id: "2",
     title: "Top 5 Cuts of Beef Every Steak Lover Should Know",
+    titleBn:
+      "প্রতিদিন আপনার দরজায় সরাসরি প্রিমিয়াম ফার্ম-ফ্রেশ মাংস ডেলিভারি করুন।",
     category: "Beef",
+    categoryBn: "বিফ",
     excerpt:
       "Learn about the best beef cuts for grilling, roasting, and premium steak dinners.",
+    excerptBn:
+      "গ্রিলিং, রোস্টিং এবং প্রিমিয়াম স্টেক ডাইনারের জন্য সবচেয়ে ভালো বিফ কাটগুলির বিস্তারিত জানুন।",
     content: `
       <p>
         Different cuts of beef provide different textures, flavors, and cooking experiences.
@@ -61,9 +75,13 @@ export const blogPosts: BlogPost[] = [
   {
     id: "3",
     title: "Healthy Benefits of Eating Fresh Chicken",
+    titleBn: "তাজা মুরগি খেতে স্বাস্থ্যের লাভ",
     category: "Chicken",
+    categoryBn: "মুরগি",
     excerpt:
       "Fresh chicken is packed with protein and essential nutrients for a balanced diet.",
+    excerptBn:
+      "তাজা মুরগি একটি সম্পূর্ণ খাদ্যসম্পদ, যা প্রোটিন এবং গুরুত্বপূর্ণ পুষ্টিকর তত্ত্বাদি ধারণ করে।",
     content: `
       <p>
         Chicken is one of the healthiest and most versatile protein sources available.
@@ -84,9 +102,13 @@ export const blogPosts: BlogPost[] = [
   {
     id: "4",
     title: "How to Store Meat Properly at Home",
+    titleBn: "ঘরে মাংস সঠিকভাবে সংরক্ষণ করা",
     category: "Storage",
+    categoryBn: "সংরক্ষণ",
     excerpt:
       "Keep your meat fresh and safe with proper refrigeration and storage techniques.",
+    excerptBn:
+      "প্রয়োগযোগ্য শীতকরণ এবং সংরক্ষণ পদ্ধতির মাধ্যমে আপনার মাংসটি তাজা এবং নিরাপদভাবে রাখুন।",
     content: `
       <p>
         Proper meat storage is essential for maintaining freshness and preventing contamination.

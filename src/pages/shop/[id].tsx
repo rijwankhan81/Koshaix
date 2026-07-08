@@ -15,12 +15,16 @@ import ProductCard from "@/component/ProductCard";
 import { localStores } from "@/constants/localStores";
 import { MdOutlineLocationOn } from "react-icons/md";
 import Choose from "@/component/whychooseus";
+import { useLanguage } from "@/context/LanguageContext";
 
 type Product = {
   id: number;
   name: string;
+  nameBn: string;
   price: number;
+  priceBn?: string;
   oldPrice?: number;
+  oldPriceBn?: string;
   image: string;
   category?: string;
 };
@@ -34,6 +38,7 @@ export default function SingleProductPage({ product, relatedProducts }: Props) {
   const nearbyStores = localStores.filter((store) =>
     store.categories.includes(product.category || ""),
   );
+  const { t } = useLanguage();
   return (
     <>
       <Head>
@@ -66,24 +71,26 @@ export default function SingleProductPage({ product, relatedProducts }: Props) {
                   <span className={styles.category}>{product.category}</span>
                 )}
 
-                <h1>{product.name}</h1>
+                <h1>{t(product.name, product.nameBn)}</h1>
 
                 <div className={styles.priceBox}>
                   <span className={styles.price}>
-                    ${product.price.toFixed(2)}
+                    ${t(product.price.toFixed(2), product.priceBn || "")}
                   </span>
 
                   {product.oldPrice && (
                     <span className={styles.oldPrice}>
-                      ${product.oldPrice.toFixed(2)}
+                      $
+                      {t(product.oldPrice.toFixed(2), product.oldPriceBn || "")}
                     </span>
                   )}
                 </div>
 
                 <p className={styles.description}>
-                  Premium quality fresh meat sourced directly from trusted farms
-                  and processed hygienically to ensure freshness, flavor, and
-                  nutrition.
+                  {t(
+                    "Premium quality fresh meat sourced directly from trusted farms and processed hygienically to ensure freshness, flavor, and nutrition.",
+                    "প্রিমিয়াম কোয়ালিটির নতুন মাংস বিশ্বস্ত কৃষকদের থেকে সরাসরি উৎসে প্রাপ্ত এবং হাইজিনিকভাবে প্রসেসড যাতে তার তাজা, স্বাদময়তা এবং পুষ্টির নিশ্চয়তা থাকে।",
+                  )}
                 </p>
 
                 <div className={styles.actions}>
@@ -92,17 +99,19 @@ export default function SingleProductPage({ product, relatedProducts }: Props) {
                   </button> */}
 
                   <button className={styles.secondaryBtn}>
-                    Add to Wishlist
+                    {t("Add to Wishlist", "ইচ্ছা তালিকায় যোগ করুন")}
                   </button>
                 </div>
 
                 <div className={styles.meta}>
                   <p>
-                    <strong>Category:</strong> {product.category}
+                    <strong>{t("Category:", "বিভাগ:")}</strong>{" "}
+                    {product.category}
                   </p>
 
                   <p>
-                    <strong>Availability:</strong> In Stock
+                    <strong>{t("Availability:", "উপলব্ধি:")}</strong>{" "}
+                    {t("In Stock", "স্টকে আছে")}
                   </p>
                 </div>
               </div>
@@ -112,11 +121,13 @@ export default function SingleProductPage({ product, relatedProducts }: Props) {
         <section className={styles.storeSection}>
           <Container>
             <div className={styles.head}>
-              <h2>Nearby Local Stores</h2>
+              <h2>{t("Nearby Local Stores", "নিকটবর্তী স্থানীয় দোকান")}</h2>
 
               <p className={styles.desc}>
-                Contact nearby trusted stores directly to place your order
-                quickly.
+                {t(
+                  "Contact nearby trusted stores directly to place your order quickly.",
+                  "নিকটবর্তী বিশ্বস্ত দোকানগুলির সাথে সরাসরি যোগাযোগ করে আপনার অর্ডার দিন।",
+                )}
               </p>
             </div>
 
@@ -135,16 +146,18 @@ export default function SingleProductPage({ product, relatedProducts }: Props) {
 
                   {/* CONTENT */}
                   <div className={styles.storeContent}>
-                    <h3>{store.name}</h3>
+                    <h3>{t(store.name || "", store.nameBn || "")}</h3>
 
                     <p className={styles.location}>
                       <MdOutlineLocationOn />
-                      <span>{store.location}</span>
+                      <span>{t(store.location, store.locationBn || "")}</span>
                     </p>
 
                     {/* ACTIONS */}
                     <div className={styles.storeActions}>
-                      <a href={`tel:${store.phone}`}>Call Store</a>
+                      <a href={`tel:${store.phone}`}>
+                        {t("Call Store", "দোকানে কল করুন")}
+                      </a>
 
                       <a
                         href={`https://wa.me/${store.whatsapp.replace(
@@ -153,7 +166,7 @@ export default function SingleProductPage({ product, relatedProducts }: Props) {
                         )}`}
                         target="_blank"
                       >
-                        WhatsApp
+                        {t("WhatsApp", "ওয়াটসঅ্যাপ")}
                       </a>
                     </div>
                   </div>
@@ -166,10 +179,13 @@ export default function SingleProductPage({ product, relatedProducts }: Props) {
         <section className={styles.relatedSection}>
           <Container>
             <div className={styles.head}>
-              <h2>Related Products</h2>
+              <h2>{t("Related Products", "সম্পর্কিত পণ্য")}</h2>
 
               <p className={styles.desc}>
-                Explore more premium fresh cuts selected for you.
+                {t(
+                  "Explore more premium fresh cuts selected for you.",
+                  "আপনার জন্য নির্বাচিত আরও প্রিমিয়াম নতুন কাট এক্সপ্লোর করুন।",
+                )}
               </p>
             </div>
 

@@ -11,15 +11,18 @@ import { Container } from "react-bootstrap";
 import ProductCard from "@/component/ProductCard";
 import Divider from "@/component/divider";
 import Choose from "@/component/whychooseus";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Home() {
   const allProducts = meatCategories
     .flatMap((cat) => cat.products)
     .sort((a, b) => a.price - b.price);
+
+  const { t } = useLanguage();
   return (
     <>
       <Head>
-        <title>Koshaix</title>
+        <title>{t("Koshaix", "কোশাইক্স")}</title>
       </Head>
       <Header />
       <main className={styles.main}>
@@ -41,12 +44,14 @@ export default function Home() {
               <div className={styles.slide}>
                 <NextImage src={"/images/hmb-1.webp"} alt={""} />
                 <div className={styles.content}>
-                  <h1>Best Choice for Fresh Meat</h1>
-                  <h2>PREMIUM MEAT</h2>
+                  <h1>
+                    {t("Best Choice for Fresh Meat", "তাজা মাংসের সেরা পছন্দ")}
+                  </h1>
+                  <h2>{t("PREMIUM MEAT", "প্রিমিয়াম মাংস")}</h2>
                   <ul className={styles.tag}>
-                    <li>Fresh</li>
-                    <li>Hygienic</li>
-                    <li>Trusted</li>
+                    <li>{t("Fresh", "তাজা")}</li>
+                    <li>{t("Hygienic", "হাইজিনিক")}</li>
+                    <li>{t("Trusted", "বিশ্বস্ত")}</li>
                   </ul>
                 </div>
               </div>
@@ -56,12 +61,12 @@ export default function Home() {
               <div className={styles.slide}>
                 <NextImage src={"/images/hmb-2.webp"} alt={""} />
                 <div className={styles.content}>
-                  <h1>Straight From Farm</h1>
-                  <h2>FRESH CUTS</h2>
+                  <h1>{t("Straight From Farm", "ফাম থেকে সরাসরি")}</h1>
+                  <h2>{t("FRESH CUTS", "তাজা কাট")}</h2>
                   <ul className={styles.tag}>
-                    <li>Juicy</li>
-                    <li>Tender</li>
-                    <li>Delicious</li>
+                    <li>{t("Juicy", "স্বাদু")}</li>
+                    <li>{t("Tender", "নরম")}</li>
+                    <li>{t("Delicious", "সুস্বাদ")}</li>
                   </ul>
                 </div>
               </div>
@@ -107,8 +112,10 @@ export default function Home() {
                 <div className={styles.slide} key={item.id}>
                   <NextImage src={item.image} alt={item.label} />
                   <div className={styles.content}>
-                    <h2>{item.label}</h2>
-                    <Link href={`/shop?category=${item.label}`}>Shop Now</Link>
+                    <h2>{t(item.label, item.labelBn)}</h2>
+                    <Link href={`/shop?category=${item.label}`}>
+                      {t("Shop Now", "এখনই কিনুন")}
+                    </Link>
                   </div>
                 </div>
               </SwiperSlide>
@@ -127,15 +134,19 @@ export default function Home() {
                     <div className={styles.icon}>
                       <NextImage src={"/images/logo.jpg"} alt={""} />
                     </div>
-                    <h2>The Premier Meat Experience</h2>
-                    <h3>WELCOME TO KOSHAIX</h3>
+                    <h2>
+                      {t(
+                        "The Premier Meat Experience",
+                        "প্রিমিয়াম মাংস অভিজ্ঞতা",
+                      )}
+                    </h2>
+                    <h3>{t("WELCOME TO KOSHAIX", "কোশাইক্সে স্বাগতম")}</h3>
                     <Divider />
                     <p className={styles.desc}>
-                      Koshaix delivers the finest quality meat and ready-to-cook
-                      solutions through our seamless online platform. We proudly
-                      serve homes, restaurants, and businesses with fresh,
-                      hygienically processed meat sourced from trusted suppliers
-                      — ensuring unmatched quality, taste, and reliability.
+                      {t(
+                        "Koshaix delivers the finest quality meat and ready-to-cook solutions through our seamless online platform. We proudly serve homes, restaurants, and businesses with fresh, hygienically processed meat sourced from trusted suppliers — ensuring unmatched quality, taste, and reliability.",
+                        "কোশাইক্স আমাদের সহজ অনলাইন প্ল্যাটফর্মের মাধ্যমে সবচেয়ে ভালো মাংস এবং প্রস্তুত খাবারের সমাধানগুলি প্রদান করে। আমরা বিশ্বস্ত সরবরাহকারীদের থেকে তাজা, জন্যভিত্তিকভাবে  processed মাংস সরবরাহ করি —অপময়তা, সুস্বাদ,এবং বিশ্বস্ততা।",
+                      )}
                     </p>
                   </div>
                 </div>
@@ -146,8 +157,13 @@ export default function Home() {
         <section className={styles.products}>
           <Container>
             <div className={styles.head}>
-              <h2>Fresh Picks for You</h2>
-              <h3>Handpicked premium cuts, ready for your kitchen</h3>
+              <h2>{t("Fresh Picks for You", "আপনার জন্য তাজা পিক")}</h2>
+              <h3>
+                {t(
+                  "Handpicked premium cuts, ready for your kitchen",
+                  "হ্যান্ডপিকড প্রিমিয়াম কাট, আপনার রান্নাঘরের জন্য প্রস্তুত",
+                )}
+              </h3>
               <Divider />
             </div>
             <div className={styles.row}>

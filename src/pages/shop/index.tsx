@@ -15,11 +15,12 @@ import { RiMenu3Fill } from "react-icons/ri";
 import { FaXmark } from "react-icons/fa6";
 
 import { useRouter } from "next/router";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ShopPage() {
   const router = useRouter();
   const { category, search } = router.query;
-
+  const { t } = useLanguage();
   // MOBILE SIDEBAR
   const [show, setShow] = useState(false);
 
@@ -100,7 +101,7 @@ export default function ShopPage() {
   return (
     <>
       <Head>
-        <title>Shop | Koshaix</title>
+        <title>{t("Shop | Koshaix", "দোকান | কোশাইক্স")}</title>
       </Head>
 
       <Header />
@@ -110,7 +111,7 @@ export default function ShopPage() {
         <section className={styles.banner}>
           <Container className={styles.container}>
             <div className={styles.content}>
-              <h2>Shop</h2>
+              <h2>{t("Shop", "দোকান")}</h2>
             </div>
           </Container>
         </section>
@@ -127,7 +128,7 @@ export default function ShopPage() {
                 <div className={styles.sidebarWrapper}>
                   {/* TITLE */}
                   <div className={styles.title}>
-                    <h3>PRODUCT CATEGORIES</h3>
+                    <h3>{t("PRODUCT CATEGORIES", "পণ্য বিভাগ")}</h3>
 
                     <button className={styles.crossIcon}>
                       <FaXmark />
@@ -143,7 +144,7 @@ export default function ShopPage() {
                           checked={selected.includes(cat.label)}
                           onChange={() => toggleCategory(cat.label)}
                         />
-                        {cat.label} ({cat.products.length})
+                        {t(cat.label, cat.labelBn)} ({cat.products.length})
                       </label>
                     ))}
                   </div>
@@ -156,12 +157,14 @@ export default function ShopPage() {
                 <div className={styles.topBar}>
                   {/* RESULTS */}
                   <p className={styles.showitems}>
-                    Showing {sortedProducts.length === 0 ? 0 : startIndex + 1}–
+                    {t("Showing", "প্রদর্শন")}{" "}
+                    {sortedProducts.length === 0 ? 0 : startIndex + 1}–
                     {Math.min(
                       startIndex + productsPerPage,
                       sortedProducts.length,
                     )}{" "}
-                    of {sortedProducts.length} results
+                    {t("of", "থেকে")} {sortedProducts.length}{" "}
+                    {t("results", "ফলাফল")}
                   </p>
 
                   {/* FILTERS */}
@@ -172,11 +175,17 @@ export default function ShopPage() {
                       value={sort}
                       onChange={(e) => setSort(e.target.value)}
                     >
-                      <option value="default">Default sorting</option>
+                      <option value="default">
+                        {t("Default sorting", "ডিফল্ট সর্টিং")}
+                      </option>
 
-                      <option value="low">Price low to high</option>
+                      <option value="low">
+                        {t("Price low to high", "মূল্য কম থেকে বেশি")}
+                      </option>
 
-                      <option value="high">Price high to low</option>
+                      <option value="high">
+                        {t("Price high to low", "মূল্য বেশি থেকে কম")}
+                      </option>
                     </select>
 
                     {/* MOBILE BUTTON */}
@@ -194,7 +203,9 @@ export default function ShopPage() {
                     ))
                   ) : (
                     <div className={styles.noProducts}>
-                      <h3>No products found</h3>
+                      <h3>
+                        {t("No products found", "কোন পণ্য পাওয়া যায়নি")}
+                      </h3>
                     </div>
                   )}
                 </div>
@@ -209,7 +220,7 @@ export default function ShopPage() {
                       }
                       disabled={currentPage === 1}
                     >
-                      Prev
+                      {t("Prev", "পূর্ববর্তী")}
                     </button>
 
                     {/* NUMBERS */}
@@ -237,7 +248,7 @@ export default function ShopPage() {
                       }
                       disabled={currentPage === totalPages}
                     >
-                      Next
+                      {t("Next", "পরবর্তী")}
                     </button>
                   </div>
                 )}
@@ -256,8 +267,10 @@ export default function ShopPage() {
                 </div>
 
                 <h2>
-                  Koshaix brings you premium-quality fresh meat directly from
-                  trusted local stores
+                  {t(
+                    "Koshaix brings you premium-quality fresh meat directly from trusted local stores",
+                    "কোশাইক্স আপনাকে বিশ্বস্ত স্থানীয় দোকানগুলি থেকে প্রিমিয়াম-গুণের তাজা মাংস পেশ করে",
+                  )}
                 </h2>
               </div>
             </div>

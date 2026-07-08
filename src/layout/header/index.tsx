@@ -13,6 +13,7 @@ import { FaXmark } from "react-icons/fa6";
 import { useWishlist } from "@/context/WishlistContext";
 import { useRouter } from "next/router";
 import { meatCategories } from "@/constants/meatCategories";
+import { useLanguage } from "@/context/LanguageContext";
 export default function Header() {
   const [show, setShow] = useState(false);
   const pathname = usePathname();
@@ -20,6 +21,7 @@ export default function Header() {
   const [isMobile, setIsMobile] = useState(false);
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
+  const { lang, setLang, t } = useLanguage();
 
   const router = useRouter();
 
@@ -116,7 +118,10 @@ export default function Header() {
                       <form onSubmit={handleSearch}>
                         <input
                           type="text"
-                          placeholder="Search meat products..."
+                          placeholder={t(
+                            "Search meat products...",
+                            "মাংসের পণ্য খুঁজুন...",
+                          )}
                           value={search}
                           onChange={(e) => setSearch(e.target.value)}
                         />
@@ -165,7 +170,7 @@ export default function Header() {
                 onClick={toggleClass}
               >
                 <div className={styles.menuTitle}>
-                  <h4>Menu</h4>
+                  <h4>{t("Menu", "মেনু")}</h4>
                   <div className={styles.crossIcon}>
                     <FaXmark />
                   </div>
@@ -186,7 +191,7 @@ export default function Header() {
                             isActive ? styles.active : ""
                           }`}
                         >
-                          {item.label}
+                          {t(item.label, item.labelBn)}
                         </Link>
                       </li>
                     );
@@ -195,7 +200,12 @@ export default function Header() {
               </div>
               <div className={styles.logo}>
                 <Link className={styles.navLink} href="/">
-                  <NextImage src={"/images/logo.jpg"} alt={""} />
+                  <NextImage
+                    src={
+                      lang === "en" ? "/images/logo.jpg" : "/images/logo-bn.jpg"
+                    }
+                    alt={""}
+                  />
                 </Link>
               </div>
               <div className={styles.menuRight}>
@@ -215,7 +225,7 @@ export default function Header() {
                             isActive ? styles.active : ""
                           }`}
                         >
-                          {item.label}
+                          {t(item.label, item.labelBn)}
                         </Link>
                       </li>
                     );
@@ -235,6 +245,14 @@ export default function Header() {
                         <span className={styles.badge}>{wishlist.length}</span>
                       )}
                     </Link>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => setLang(lang === "en" ? "bn" : "en")}
+                      className={styles.langBtn}
+                    >
+                      {lang === "en" ? "বাংলা" : "English"}
+                    </button>
                   </li>
                 </ul>
               </div>
