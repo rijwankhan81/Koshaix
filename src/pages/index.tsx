@@ -12,13 +12,14 @@ import ProductCard from "@/component/ProductCard";
 import Divider from "@/component/divider";
 import Choose from "@/component/whychooseus";
 import { useLanguage } from "@/context/LanguageContext";
+import Newsletter from "@/component/newslatter";
 
 export default function Home() {
   const allProducts = meatCategories
     .flatMap((cat) => cat.products)
     .sort((a, b) => a.price - b.price);
 
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   return (
     <>
       <Head>
@@ -73,6 +74,9 @@ export default function Home() {
             </SwiperSlide>
           </Swiper>
         </section>
+        {/* <Hero />
+        <CategoryGrid />
+        <NearbyShops /> */}
         <section className={styles.itemslist}>
           <Swiper
             modules={[EffectFade, Autoplay]}
@@ -132,7 +136,14 @@ export default function Home() {
                   </div>
                   <div className={styles.content}>
                     <div className={styles.icon}>
-                      <NextImage src={"/images/logo.jpg"} alt={""} />
+                      <NextImage
+                        src={
+                          lang === "en"
+                            ? "/images/logo.jpg"
+                            : "/images/logo-bn.jpg"
+                        }
+                        alt="Koshaix"
+                      />
                     </div>
                     <h2>
                       {t(
@@ -167,13 +178,14 @@ export default function Home() {
               <Divider />
             </div>
             <div className={styles.row}>
-              {allProducts.map((product) => (
+              {allProducts.slice(0, 8).map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
           </Container>
         </section>
         <Choose />
+        <Newsletter />
       </main>
       <Footer />
     </>

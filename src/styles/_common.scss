@@ -1,109 +1,188 @@
-@use '../styles/var' as *;
+@import "./var";
 
-body {
-    font-family: $font_one;
-}
 
-.main {
-    padding-top: 80px;
 
-    @media(max-width:$md) {
-        padding-top: 40px;
-    }
-}
 
-.head {
-    padding-bottom: 30px;
-    text-align: center;
-    max-width: 800px;
-    margin: auto;
 
-    @media(max-width:$sm) {
-        padding-bottom: 20px;
-    }
+// ============================================
+// KOSHAIX — MIXINS
+// ============================================
 
-    .title {
-        padding: 7px 14px;
-        background: #CED6FF;
-        color: $primary;
-        width: fit-content;
-        border-radius: 40px;
-        margin: auto;
+// @use "sass:map";
 
-        svg {
-            color: $primary;
-            font-size: 18px;
-            margin-right: 5px;
+
+// -------- RESPONSIVE MIXIN (max-width, matches token breakpoints) --------
+// Usage: @include mq-down(md) { ... }
+@mixin mq-down($breakpoint) {
+    @if $breakpoint ==xxxl {
+        @media (max-width: $xxxl) {
+            @content;
         }
     }
 
-    h2 {
-        font-size: 28px;
-        font-weight: 800;
-        margin: 10px 0;
-        line-height: 1.1;
-        text-transform: capitalize;
-
-        @media(max-width:$sm) {
-            font-size: 18px;
+    @else if $breakpoint ==xxl {
+        @media (max-width: $xxl) {
+            @content;
         }
     }
 
-    h3 {
-        font-family: $font_two;
-        font-size: 34px;
-        color: $primary;
-        text-transform: uppercase;
-
-        @media(max-width:$sm) {
-            font-size: 22px;
+    @else if $breakpoint ==xl {
+        @media (max-width: $xl) {
+            @content;
         }
-
     }
 
-    .desc {
-        font-size: 20px;
-        color: #374151;
-        margin: 0;
-
-        @media(max-width:$lg) {
-            font-size: 18px;
+    @else if $breakpoint ==lg {
+        @media (max-width: $lg) {
+            @content;
         }
+    }
 
-        @media(max-width:$sm) {
-            font-size: 16px;
+    @else if $breakpoint ==md {
+        @media (max-width: $md) {
+            @content;
         }
+    }
+
+    @else if $breakpoint ==sm {
+        @media (max-width: $sm) {
+            @content;
+        }
+    }
+
+    @else {
+        @warn "Unknown breakpoint: #{$breakpoint}";
     }
 }
 
-.divider {
+// -------- RESPONSIVE MIXIN (min-width, for mobile-first exceptions) --------
+@mixin mq-up($breakpoint) {
+    @if $breakpoint ==sm {
+        @media (min-width: #{ $sm + 1 }) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint ==md {
+        @media (min-width: #{ $md + 1 }) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint ==lg {
+        @media (min-width: #{ $lg + 1 }) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint ==xl {
+        @media (min-width: #{ $xl + 1 }) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint ==xxl {
+        @media (min-width: #{ $xxl + 1 }) {
+            @content;
+        }
+    }
+
+    @else {
+        @warn "Unknown breakpoint: #{$breakpoint}";
+    }
+}
+
+// -------- FLEX HELPERS --------
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $gap: 0) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+    gap: $gap;
+}
+
+@mixin center {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+}
 
-    span {
-        display: block;
-
-        &:first-child,
-        &:last-child {
-            width: 50px;
-            height: 2px;
-            background-color: #ccc;
-            /* line color */
-        }
+// -------- TEXT TRUNCATE --------
+@mixin truncate($lines: 1) {
+    @if $lines ==1 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
-    .diamond {
-        width: 10px;
-        height: 10px;
-        background-color: #b44a2a;
-        transform: rotate(45deg);
+    @else {
+        display: -webkit-box;
+        -webkit-line-clamp: $lines;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
 
-        &:nth-child(2),
-        &:nth-child(4) {
-            width: 6px;
-            height: 6px;
-        }
+// -------- BUTTON BASE --------
+@mixin btn-base {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-2;
+    padding: $space-3 $space-6;
+    border-radius: $radius-pill;
+    font-family: $font_one;
+    font-weight: $fw-semibold;
+    font-size: $fs-base;
+    border: none;
+    cursor: pointer;
+    transition: $transition-base;
+}
+
+@mixin btn-primary {
+    @include btn-base;
+    background: $primary;
+    color: $white;
+
+    &:hover {
+        background: $primary-dark;
+        box-shadow: $shadow-red-glow;
+        transform: translateY(-2px);
+    }
+}
+
+@mixin btn-outline {
+    @include btn-base;
+    background: transparent;
+    color: $secondary;
+    border: 1.5px solid $secondary;
+
+    &:hover {
+        background: $secondary;
+        color: $white;
+    }
+}
+
+// -------- CARD BASE --------
+@mixin card-base {
+    background: $white;
+    border-radius: $radius-md;
+    box-shadow: $shadow-sm;
+    transition: $transition-base;
+
+    &:hover {
+        box-shadow: $shadow-md;
+        transform: translateY(-4px);
+    }
+}
+
+// -------- SECTION SPACING --------
+@mixin section-padding {
+    padding-top: $space-9;
+    padding-bottom: $space-9;
+
+    @include mq-down(md) {
+        padding-top: $space-7;
+        padding-bottom: $space-7;
     }
 }

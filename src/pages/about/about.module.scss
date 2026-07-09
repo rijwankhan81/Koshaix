@@ -1,179 +1,355 @@
-@use "../../styles/common" as *;
-@use "../../styles/var" as *;
+@import "../../styles/var";
+@import "../../styles/common";
 
+.main {
+    background: $bg-light;
+}
+
+// -------- BANNER --------
 .banner {
-    position: relative;
-    padding: 100px 0;
-    background: url('/images/bg3.webp') no-repeat center/cover;
+    background: $secondary-dark;
+    color: $white;
+    padding-block: $space-7;
 
-    @media(max-width:$xl) {
-        padding: 70px 0;
-    }
-
-    @media(max-width:$lg) {
-        padding: 50px 0;
-    }
-
-
-
-
-    &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.514);
-        z-index: 1;
-    }
-
-    .container {
-        position: relative;
-        z-index: 2;
-    }
-
-    .content {
-        text-align: center;
-
-        h2 {
-            color: #fff;
-            font-family: $font_two;
-            font-size: 64px;
-            max-width: 600px;
-            margin: auto;
-
-            @media(max-width:$sm) {
-                font-size: 44px;
-            }
-        }
+    h1 {
+        color: $white;
+        font-size: $fs-2xl;
     }
 }
 
+.breadcrumb {
+    display: inline-block;
+    font-size: $fs-xs;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: $ls-wide;
+    margin-bottom: $space-4;
+
+    span {
+        color: $primary-light;
+        margin-inline: $space-1;
+    }
+}
+
+.eyebrow {
+    display: block;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    letter-spacing: $ls-wider;
+    text-transform: uppercase;
+    color: $primary;
+    margin-bottom: $space-2;
+}
+
+// -------- INTRO --------
 .about {
+    padding-block: $space-9;
+
+    @include mq-down(md) {
+        padding-block: $space-7;
+    }
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: $space-8;
+    align-items: center;
+
+    @include mq-down(lg) {
+        grid-template-columns: 1fr;
+        gap: $space-6;
+    }
+}
+
+.content {
+    h2 {
+        font-size: $fs-2xl;
+        color: $text-dark;
+        margin-bottom: $space-4;
+    }
+}
+
+.desc {
+    font-size: $fs-sm;
+    color: $text-muted;
+    line-height: $lh-loose;
+    margin-bottom: $space-4;
+}
+
+.image {
     position: relative;
-    padding: 100px 0;
+}
 
-    @media(max-width:$xl) {
-        padding: 70px 0;
+.imageWrapper {
+    position: relative;
+    border-radius: $radius-md;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.imageCut {
+    position: absolute;
+    top: -20%;
+    right: -20%;
+    width: 45%;
+    height: 55%;
+    background: $primary;
+    opacity: 0.15;
+    transform: rotate(28deg);
+    pointer-events: none;
+}
+
+.statCard {
+    position: absolute;
+    bottom: -$space-5;
+    left: $space-5;
+    background: $secondary;
+    color: $white;
+    padding: $space-4 $space-6;
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+
+    strong {
+        display: block;
+        font-size: $fs-xl;
+        color: $primary-light;
     }
 
-    @media(max-width:$lg) {
-        padding: 50px 0;
+    span {
+        font-size: $fs-xs;
+        color: rgba(255, 255, 255, 0.7);
+        text-transform: uppercase;
+        letter-spacing: $ls-wide;
     }
 
-    @media(max-width:$md) {
-        padding: 40px 0;
+    @include mq-down(sm) {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+// -------- STATS BAR --------
+.statsBar {
+    background: $secondary;
+    padding-block: $space-7;
+    margin-top: $space-7;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-5;
+    text-align: center;
+
+    @include mq-down(sm) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: $space-6;
+    }
+}
+
+.statItem {
+    strong {
+        display: block;
+        font-size: $fs-2xl;
+        color: $primary-light;
+        margin-bottom: $space-1;
     }
 
-    @media(max-width:$sm) {
-        padding: 30px 0;
+    span {
+        font-size: $fs-xs;
+        color: rgba(255, 255, 255, 0.6);
+        text-transform: uppercase;
+        letter-spacing: $ls-wide;
+    }
+}
+
+// -------- HOW IT WORKS --------
+.howItWorks {
+    background: $bg-subtle;
+    padding-block: $space-9;
+
+    @include mq-down(md) {
+        padding-block: $space-7;
+    }
+}
+
+.head {
+    text-align: center;
+    margin-bottom: $space-8;
+
+    h2 {
+        font-size: $fs-2xl;
+        color: $text-dark;
+    }
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-7;
+
+    @include mq-down(md) {
+        grid-template-columns: 1fr;
+        gap: $space-8;
+    }
+}
+
+.step {
+    position: relative;
+    text-align: center;
+    padding-inline: $space-4;
+
+    h4 {
+        font-size: $fs-lg;
+        color: $text-dark;
+        margin-bottom: $space-2;
     }
 
-    .wrap {
+    p {
+        font-size: $fs-sm;
+        color: $text-muted;
+    }
+}
 
-        position: relative;
-        z-index: 1;
+.stepNum {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: $secondary;
+    color: $primary-light;
+    font-size: $fs-lg;
+    font-weight: $fw-bold;
+    margin-bottom: $space-4;
+}
 
+.connector {
+    display: none;
 
+    @include mq-up(md) {
+        display: block;
+        position: absolute;
+        top: 28px;
+        left: calc(50% + 45px);
+        width: calc(100% - 90px);
+        height: 2px;
+        background: repeating-linear-gradient(to right,
+                $gray-400 0,
+                $gray-400 6px,
+                transparent 6px,
+                transparent 12px);
+    }
+}
 
-        .rowWrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 70px;
+// -------- VALUES --------
+.values {
+    padding-block: $space-9;
 
-            @media(max-width:$sm) {
+    @include mq-down(md) {
+        padding-block: $space-7;
+    }
+}
 
-                gap: 40px;
-            }
-        }
+.valuesGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-5;
 
-        .row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
+    @include mq-down(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-            @media(max-width:$lg) {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
+    @include mq-down(sm) {
+        grid-template-columns: 1fr;
+    }
+}
 
-            .image {
+.valueCard {
+    text-align: center;
+    padding: $space-6 $space-4;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    transition: $transition-base;
 
-                img {
-                    width: 100%;
-                    aspect-ratio: 1/1;
-                    position: relative;
-                    z-index: 1;
-                    object-fit: cover;
-                    border-radius: 12px;
+    &:hover {
+        border-color: $primary;
+        box-shadow: $shadow-sm;
+    }
 
-                    @media(max-width:$sm) {
-                        height: 250px;
-                    }
-                }
+    h4 {
+        font-size: $fs-md;
+        color: $text-dark;
+        margin-bottom: $space-2;
+    }
 
+    p {
+        font-size: $fs-sm;
+        color: $text-muted;
+    }
+}
 
-            }
-        }
+.valueIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: $primary-tint;
+    color: $primary;
+    font-size: $fs-lg;
+    margin-bottom: $space-4;
+}
 
+// -------- SELLER CTA --------
+.sellerCta {
+    background: $primary-dark;
+    padding-block: $space-7;
+}
 
-        .content {
+.sellerCtaInner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-5;
+    flex-wrap: wrap;
 
-            .icon {
-                img {
-                    height: auto;
-                    max-width: 170px;
-                }
-            }
+    h2 {
+        color: $white;
+        font-size: $fs-xl;
+        margin-bottom: $space-1;
+    }
 
-            h2 {
-                font-family: $font_two;
-                font-size: 32px;
-                color: $primary;
-                line-height: 1.1;
-                margin: 20px 0;
+    p {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: $fs-sm;
+    }
+}
 
-                @media(max-width:$sm) {
-                    font-size: 28px;
-                }
+.sellerCtaBtn {
+    display: inline-flex;
+    align-items: center;
+    background: $secondary;
+    color: $white;
+    padding: $space-3 $space-6;
+    border-radius: $radius-pill;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    white-space: nowrap;
+    transition: $transition-fast;
+    text-decoration: none;
 
-
-            }
-
-            h3 {
-                font-weight: 800;
-                font-size: 24px;
-                margin-bottom: 30px;
-            }
-
-            .desc {
-                color: #374151;
-                margin: 20px 0;
-                font-size: 16px;
-
-                @media(max-width:$md) {
-                    margin: 10px 0;
-                }
-            }
-
-            ul {
-                padding: 0;
-                margin: 0;
-                list-style: none;
-
-                h4 {
-                    font-family: $font_two;
-                    font-size: 18px;
-                    margin-bottom: 0px;
-
-                    @media(max-width:$sm) {
-                        font-size: 16px;
-                    }
-                }
-            }
-
-        }
+    &:hover {
+        background: $secondary-light;
     }
 }

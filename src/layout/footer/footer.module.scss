@@ -1,279 +1,154 @@
-@use "../../styles/common" as *;
-@use "../../styles/var" as *;
+@import "../../styles/common";
+@import "../../styles/var";
+
 
 
 .footer {
-    padding-top: 80px;
-    color: #564e4c;
-    background: #fff;
-    position: relative;
+    background: $secondary-dark;
+    color: rgba(255, 255, 255, 0.7);
+}
 
 
-    @media (max-width: $sm) {
-        padding-top: 50px;
+
+// -------- MAIN GRID --------
+.wrapper {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: $space-7;
+    padding-block: $space-9;
+
+    @include mq-down(lg) {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .wrapper {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1fr;
-        justify-content: space-between;
-        gap: 30px;
-
-        @media (max-width: $lg) {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        @media (max-width: $sm) {
-            gap: 25px;
-            grid-template-columns: 1fr;
-        }
-
-        h3 {
-            font-size: 14px;
-            margin-bottom: 20px;
-            color: #978f8d;
-            text-transform: uppercase;
-
-
-            @media (max-width: $sm) {
-                text-align: center;
-            }
-        }
-
-        h4 {
-            font-size: 18px;
-            margin-bottom: 20px;
-
-            @media (max-width: $xxl) {
-                font-size: 16px;
-            }
-
-        }
-
-        .inner_wrapper {
-            width: 100%;
-            max-width: 400px;
-
-            @media (max-width: $xl) {
-                max-width: 100%;
-            }
-
-            .logo {
-                display: block;
-                text-align: left;
-                margin-bottom: 20px;
-
-
-                @media (max-width: $sm) {
-                    text-align: center;
-                }
-
-                img {
-                    width: 160px;
-                    height: auto;
-                    background: #ffffff;
-
-                    border-radius: 8px;
-
-                    @media(max-width:$md) {
-                        width: 100px;
-                    }
-                }
-            }
-
-            p {
-                color: #564e4c;
-
-                @media (max-width: $sm) {
-                    text-align: center;
-                }
-            }
-
-            .location {
-                a {
-                    color: #fff;
-                }
-            }
-        }
-
-        .footer_menu {
-            @media (max-width: $md) {
-                width: 100%;
-                border-bottom: 2px solid #978f8d;
-                padding-bottom: 30px;
-            }
-
-            ul {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-
-                @media (max-width: $sm) {
-
-                    align-items: center;
-                }
-
-                li {
-                    display: flex;
-                    gap: 8px;
-
-                    @media (max-width: $sm) {
-                        text-align: center;
-                    }
-
-                    svg {
-                        margin-top: 4px;
-                        width: 16px;
-
-                    }
-
-                    a {
-                        text-decoration: none;
-                        color: #564e4c;
-                        font-size: 16px;
-                        font-weight: 400;
-
-                    }
-
-                    span {
-                        color: #564e4c;
-                        font-size: 16px;
-                        font-weight: 400;
-                        width: fit-content;
-                    }
-
-                    .active {
-                        color: $secondary;
-                    }
-                }
-            }
-        }
-
-
-
-
+    @include mq-down(sm) {
+        grid-template-columns: 1fr;
+        padding-block: $space-7;
+        gap: $space-6;
     }
+}
 
-    .connect {
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
+.inner_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
 
-            @media (max-width: $sm) {
-                justify-content: center;
-            }
-
-            a {
-                text-decoration: none;
-                width: 40px;
-                height: 40px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: $primary;
-                border-radius: 40px;
-
-                svg {
-
-
-                    color: #fff;
-                    font-size: 20px;
-                }
-            }
-        }
-
-
+    p {
+        font-size: $fs-sm;
+        color: rgba(255, 255, 255, 0.55);
+        line-height: $lh-base;
+        max-width: 300px;
     }
+}
 
-    .footer_bootom {
-        padding: 50px 0;
-        margin-top: 40px;
+.logo {
+    display: inline-flex;
+
+    img {
+        height: 40px;
+        width: auto;
+    }
+}
+
+.contactList {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+    padding: 0;
+
+
+    li {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        border-top: 2px solid grey;
+        gap: $space-2;
+        font-size: $fs-sm;
+        color: rgba(255, 255, 255, 0.6);
 
-        @media (max-width: $md) {
-            margin-top: 30px;
-            flex-direction: column;
-            border: none;
-            padding: 30px 0;
-            gap: 20px;
-        }
-
-
-        .copyright {
-            font-size: 18px;
-            font-weight: 400;
-            color: #564e4c;
-            margin: 0%;
-
-            @media (max-width: $md) {
-                font-size: 16px;
-                text-align: center;
-            }
-
-            a {
-                text-decoration: none;
-            }
-
-            .powerdby {
-                width: 100px;
-                object-fit: contain;
-                padding-left: 5px;
-            }
-        }
-
-
-
-        .policy {
-            display: flex;
-            gap: 20px;
-
-            @media (max-width: $md) {
-                justify-content: center;
-            }
-
-
-            a {
-                color: #fff;
-                text-decoration: none;
-                font-size: 20px;
-                font-weight: 600;
-
-                @media (max-width: $xxl) {
-                    font-size: 18px;
-                }
-
-                @media (max-width: $md) {
-                    font-size: 16px;
-                    text-align: center;
-                }
-            }
+        svg {
+            color: $primary-light;
+            flex-shrink: 0;
         }
     }
+}
 
-    .copy {
-        text-align: center;
-        margin-top: 30px;
-        margin-bottom: 0;
+.socialList {
+    display: flex;
+    gap: $space-3;
+    padding: 0;
+    margin: 0;
 
-        a {
-            text-decoration: none;
-            color: #564e4c;
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.06);
+        color: $white;
+        transition: $transition-fast;
 
-            &:hover {
-                color: $primary;
-            }
+        &:hover {
+            background: $primary;
         }
     }
+}
 
+// -------- FOOTER MENU COLUMNS --------
+.footer_menu {
+    h3 {
+        color: $white;
+        font-size: $fs-sm;
+        text-transform: uppercase;
+        letter-spacing: $ls-wide;
+        margin-bottom: $space-4;
+    }
 
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: $space-3;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.nav_link {
+    font-size: $fs-sm;
+    color: rgba(255, 255, 255, 0.6);
+    transition: $transition-fast;
+    text-decoration: none;
+
+    &:hover {
+        color: $primary-light;
+    }
+}
+
+.active {
+    color: $primary-light;
+    font-weight: $fw-semibold;
+}
+
+// -------- BOTTOM BAR --------
+.footer_bootom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-3;
+    padding-block: $space-4;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    flex-wrap: wrap;
+}
+
+.copyright {
+    font-size: $fs-xs;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.tagline {
+    font-size: $fs-xs;
+    color: $primary-light;
+    text-transform: uppercase;
+    letter-spacing: $ls-wider;
+    font-weight: $fw-semibold;
 }

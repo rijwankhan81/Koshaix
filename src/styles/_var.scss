@@ -1,12 +1,123 @@
-$primary: #ed1b24;
-$secondary: #1e1e1e;
+// ============================================
+// KOSHAIX — DESIGN TOKENS
+// Brand: Dark, bold, high-contrast butcher/meat brand
+// ============================================
 
-$font_one: "Golos Text", sans-serif;
-$font_two: "Vast Shadow", serif;
+// -------- BRAND COLORS --------
+$primary: #ed1b24; // Koshai red (cleaver, accent)
+$primary-dark: #c4141c;
+$primary-light: #ff4a52;
+$primary-tint: #ffe3e4; // for subtle bg tints / badges
 
+$secondary: #1e1e1e; // near-black (logo bg, dark sections)
+$secondary-light: #2c2c2c;
+$secondary-dark: #121212;
+
+// -------- NEUTRALS --------
+$white: #ffffff;
+$black: #000000;
+
+$gray-100: #f7f7f7;
+$gray-200: #eeeeee;
+$gray-300: #e0e0e0;
+$gray-400: #bdbdbd;
+$gray-500: #9e9e9e;
+$gray-600: #757575;
+$gray-700: #4f4f4f;
+$gray-800: #2c2c2c;
+$gray-900: #1a1a1a;
+
+// -------- SEMANTIC / UI COLORS --------
+$bg-dark: $secondary; // default dark section bg
+$bg-light: $white; // default light section bg
+$bg-subtle: $gray-100; // section alternate bg
+$text-dark: $secondary-dark;
+$text-light: $white;
+$text-muted: $gray-600;
+$border-color: $gray-300;
+$border-color-dark: $gray-800;
+
+$success: #1ea34c;
+$warning: #f2a900;
+$danger: $primary;
+$overlay: rgba(0, 0, 0, 0.6);
+
+// -------- TYPOGRAPHY --------
+$font_one: "Golos Text", sans-serif; // primary UI / body font
+$font_two: "Vast Shadow", serif; // display / stylized accents (use sparingly)
+
+$fs-xs: 0.75rem; // 12px
+$fs-sm: 0.875rem; // 14px
+$fs-base: 1rem; // 16px
+$fs-md: 1.125rem; // 18px
+$fs-lg: 1.25rem; // 20px
+$fs-xl: 1.5rem; // 24px
+$fs-2xl: 2rem; // 32px
+$fs-3xl: 2.5rem; // 40px
+$fs-4xl: 3.5rem; // 56px
+$fs-5xl: 4.5rem; // 72px
+
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semibold: 600;
+$fw-bold: 700;
+$fw-black: 900;
+
+$lh-tight: 1.15;
+$lh-base: 1.5;
+$lh-loose: 1.8;
+
+$ls-wide: 0.05em; // letter-spacing for tagline-style caps text
+$ls-wider: 0.15em;
+
+// -------- SPACING SCALE --------
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-5: 24px;
+$space-6: 32px;
+$space-7: 48px;
+$space-8: 64px;
+$space-9: 96px;
+$space-10: 128px;
+
+// -------- RADIUS --------
+$radius-sm: 6px;
+$radius-md: 12px;
+$radius-lg: 20px;
+$radius-pill: 999px;
+
+// -------- SHADOWS --------
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+$shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+$shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.18);
+$shadow-red-glow: 0 8px 24px rgba(237, 27, 36, 0.35); // used for CTA buttons/cards
+
+// -------- TRANSITIONS --------
+$transition-fast: 0.15s ease;
+$transition-base: 0.3s ease;
+$transition-slow: 0.5s ease;
+
+// -------- Z-INDEX LAYERS --------
+$z-dropdown: 1000;
+$z-sticky: 1020;
+$z-header: 1030;
+$z-modal-backdrop: 1040;
+$z-modal: 1050;
+$z-toast: 1060;
+
+// -------- BREAKPOINTS (max-width based) --------
 $xxxl: 1759px;
 $xxl: 1399px;
 $xl: 1199px;
 $lg: 991px;
 $md: 767px;
 $sm: 575px;
+
+// -------- CONTAINER MAX-WIDTHS --------
+$container-xxl: 1320px;
+$container-xl: 1140px;
+$container-lg: 960px;
+$container-md: 720px;
+$container-sm: 540px;

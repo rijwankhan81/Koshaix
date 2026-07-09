@@ -1,3 +1,5 @@
+"use client";
+
 import React, {
   createContext,
   useContext,
@@ -6,11 +8,12 @@ import React, {
   ReactNode,
 } from "react";
 
-type Lang = "en" | "bn";
+type Language = "en" | "bn";
 
 interface LanguageContextType {
-  lang: Lang;
-  setLang: (lang: Lang) => void;
+  lang: Language;
+  setLang: (lang: Language) => void;
+  toggleLang: () => void;
   t: (en: string, bn: string) => string;
 }
 
@@ -18,26 +21,35 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined,
 );
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("en");
+const STORAGE_KEY = "koshaix_lang";
 
-  // page load par saved language uthao
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [lang, setLangState] = useState<Language>("en");
+
+  // Load saved preference on mount
   useEffect(() => {
-    const saved = localStorage.getItem("koshaix_lang") as Lang | null;
+    const saved = window.localStorage.getItem(STORAGE_KEY) as Language | null;
     if (saved === "en" || saved === "bn") {
       setLangState(saved);
     }
   }, []);
 
-  const setLang = (newLang: Lang) => {
+  const setLang = (newLang: Language) => {
     setLangState(newLang);
-    localStorage.setItem("koshaix_lang", newLang);
+    window.localStorage.setItem(STORAGE_KEY, newLang);
   };
 
-  const t = (en: string, bn: string) => (lang === "bn" ? bn : en);
+  const toggleLang = () => {
+    setLang(lang === "en" ? "bn" : "en");
+  };
+
+  // Core translation function: pass English text and Bangla text directly
+  const t = (en: string, bn: string): string => {
+    return lang === "bn" ? bn : en;
+  };
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, t }}>
+    <LanguageContext.Provider value={{ lang, setLang, toggleLang, t }}>
       {children}
     </LanguageContext.Provider>
   );

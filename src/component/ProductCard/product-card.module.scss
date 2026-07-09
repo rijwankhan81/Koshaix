@@ -1,184 +1,310 @@
-@use "../../styles/common" as *;
-@use "../../styles/var" as *;
+@import "../../styles/common";
+@import "../../styles/var";
 
 
 .card {
-    background: #fff;
-    border-radius: 6px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    border: 1px solid #f7f4ef;
     position: relative;
-    cursor: pointer;
+    background: $white;
+    border-radius: $radius-md;
+    overflow: hidden;
+    box-shadow: $shadow-sm;
+    transition: $transition-base;
 
     &:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        box-shadow: $shadow-md;
+        transform: translateY(-4px);
 
         .image {
-            transform: scale(1.05);
-        }
-    }
-
-    .imageWrapper {
-        position: relative;
-        width: 100%;
-        height: 220px;
-        background: #f9f9f9;
-
-        @media(max-width:$sm) {
-            height: 180px;
-        }
-
-        .image {
-            object-fit: cover;
-            transition: 0.4s ease;
-            width: 100%;
-            height: 100%;
-        }
-
-        &:hover {
-            .btnWrap {
-                opacity: 1;
-                visibility: visible;
-                bottom: 10px;
-            }
-
-            .whishlistIcon {
-                opacity: 1;
-                visibility: visible;
-                top: 10px;
-            }
-        }
-
-        .whishlistIcon {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 32px;
-            height: 32px;
-            position: absolute;
-            top: 0px;
-            right: 10px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.3s ease;
-            border: none;
-
-            svg {
-                color: $primary;
-                font-size: 16px;
-            }
-
-            @media(max-width:$lg) {
-                opacity: 1;
-                visibility: visible;
-                top: 10px;
-            }
+            transform: scale(1.07);
         }
 
         .btnWrap {
-            display: block;
-            width: 100%;
-            height: fit-content;
-            transition: 0.3s ease;
-            position: absolute;
-            opacity: 0;
-            visibility: hidden;
-            bottom: 0px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-
-            @media(max-width:$lg) {
-                opacity: 1;
-                visibility: visible;
-                bottom: 10px;
-            }
-
-            .btn {
-                transition: 0.3s ease;
-                width: 90%;
-                padding: 10px;
-                border-radius: 80px;
-                border: none;
-                background: $primary;
-                color: #fff;
-                font-weight: 600;
-
-                text-transform: uppercase;
-                font-size: 12px;
-
-
-                &:hover {
-                    background: #000;
-                }
-
-
-            }
+            transform: translateY(0);
+            opacity: 1;
         }
     }
+}
 
-    .content {
-        padding: 16px;
-        text-align: center;
-        border-top: 1px solid #f7f4ef;
-        position: relative;
-        background: #fff;
-
-        .priceBox {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 14px;
-
-        }
-
-        .price {
-            font-size: 18px;
-            font-weight: 700;
-            color: $primary;
-
-            @media(max-width:$sm) {
-                font-size: 16px;
-            }
-        }
-
-        .oldPrice {
-            font-size: 14px;
-            text-decoration: line-through;
-            color: #999;
-
-            @media(max-width:$sm) {
-                font-size: 14px;
-            }
-        }
-
-        .titleWrap {
-            text-decoration: none;
-            color: inherit;
-
-            .title {
-                font-size: 16px;
-                font-weight: 600;
-                margin-bottom: 10px;
-                color: #222;
-
-                @media(max-width:$sm) {
-                    font-size: 14px;
-                }
-            }
-        }
-
-
-
-
-
-
+.cardDisabled {
+    &:hover {
+        transform: none;
     }
 
+    .image {
+        filter: grayscale(0.4);
+    }
+}
 
+.imageWrapper {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: $gray-100;
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.cardCut {
+    position: absolute;
+    top: -25%;
+    right: -25%;
+    width: 45%;
+    height: 55%;
+    background: $primary;
+    opacity: 0.12;
+    transform: rotate(28deg);
+    pointer-events: none;
+}
+
+.stockOverlay {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(30, 30, 30, 0.55);
+
+    span {
+        color: $white;
+        font-size: $fs-sm;
+        font-weight: $fw-semibold;
+        letter-spacing: $ls-wide;
+        text-transform: uppercase;
+        border: 1.5px solid $white;
+        padding: $space-2 $space-4;
+        border-radius: $radius-pill;
+    }
+}
+
+.topRow {
+    position: absolute;
+    top: $space-3;
+    left: $space-3;
+    right: $space-3;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: $space-2;
+    z-index: 2;
+}
+
+.topLeftBadges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+    max-width: 75%;
+}
+
+.badge {
+    background: rgba(30, 30, 30, 0.85);
+    color: $white;
+    font-size: $fs-xs;
+    font-weight: $fw-semibold;
+    letter-spacing: $ls-wide;
+    text-transform: uppercase;
+    padding: $space-1 $space-3;
+    border-radius: $radius-pill;
+}
+
+.freshBadge {
+    background: rgba(255, 255, 255, 0.9);
+    color: $text-dark;
+    font-size: $fs-xs;
+    font-weight: $fw-semibold;
+    padding: $space-1 $space-3;
+    border-radius: $radius-pill;
+}
+
+.freshToday {
+    background: $success;
+    color: $white;
+}
+
+.bestSellerBadge {
+    background: $secondary;
+    color: $white;
+    font-size: $fs-xs;
+    font-weight: $fw-semibold;
+    padding: $space-1 $space-3;
+    border-radius: $radius-pill;
+}
+
+.newBadge {
+    background: $primary;
+    color: $white;
+    font-size: $fs-xs;
+    font-weight: $fw-semibold;
+    padding: $space-1 $space-3;
+    border-radius: $radius-pill;
+}
+
+.discountBadge {
+    background: $primary;
+    color: $white;
+    font-size: $fs-xs;
+    font-weight: $fw-bold;
+    padding: $space-1 $space-3;
+    border-radius: $radius-pill;
+    box-shadow: $shadow-red-glow;
+    flex-shrink: 0;
+}
+
+.wishlistIcon {
+    position: absolute;
+    top: $space-3;
+    right: $space-3;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: $white;
+    border: none;
+    color: $primary;
+    font-size: $fs-sm;
+    cursor: pointer;
+    box-shadow: $shadow-sm;
+    transition: $transition-fast;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.btnWrap {
+    position: absolute;
+    left: $space-3;
+    right: $space-3;
+    bottom: $space-3;
+    z-index: 2;
+    transform: translateY(8px);
+    opacity: 0;
+    transition: $transition-base;
+
+    @include mq-down(md) {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.btn {
+    @include btn-primary;
+    width: 100%;
+    padding-block: $space-2;
+    font-size: $fs-xs;
+    justify-content: center;
+
+    &:disabled {
+        background: $gray-500;
+        box-shadow: none;
+        cursor: not-allowed;
+
+        &:hover {
+            background: $gray-500;
+            transform: none;
+            box-shadow: none;
+        }
+    }
+}
+
+.content {
+    padding: $space-4 $space-4 $space-5;
+}
+
+.ratingRow {
+    display: flex;
+    align-items: center;
+    gap: $space-1;
+    margin-bottom: $space-2;
+}
+
+.starIcon {
+    color: $warning;
+    font-size: $fs-xs;
+}
+
+.ratingValue {
+    font-size: $fs-xs;
+    font-weight: $fw-semibold;
+    color: $text-dark;
+}
+
+.reviewCount {
+    font-size: $fs-xs;
+    color: $text-muted;
+}
+
+.titleWrap {
+    display: block;
+    text-decoration: none;
+}
+
+.title {
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    color: $text-dark;
+    line-height: $lh-base;
+    margin-bottom: $space-1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.6em;
+    transition: $transition-fast;
+
+
+    .titleWrap:hover & {
+        color: $primary;
+    }
+}
+
+.shortDesc {
+    font-size: $fs-xs;
+    color: $text-muted;
+    margin-bottom: $space-3;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.priceBox {
+    display: flex;
+    align-items: baseline;
+    gap: $space-2;
+}
+
+.price {
+    font-size: $fs-lg;
+    font-weight: $fw-bold;
+    color: $secondary;
+}
+
+.unit {
+    font-size: $fs-xs;
+    font-weight: $fw-regular;
+    color: $text-muted;
+    margin-left: 2px;
+}
+
+.oldPrice {
+    font-size: $fs-sm;
+    color: $text-muted;
+    text-decoration: line-through;
+}
+
+.minOrder {
+    font-size: $fs-xs;
+    color: $text-muted;
+    margin-top: $space-2;
+    margin-bottom: 0;
 }

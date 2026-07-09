@@ -14,6 +14,7 @@ import { useWishlist } from "@/context/WishlistContext";
 import { useRouter } from "next/router";
 import { meatCategories } from "@/constants/meatCategories";
 import { useLanguage } from "@/context/LanguageContext";
+
 export default function Header() {
   const [show, setShow] = useState(false);
   const pathname = usePathname();
@@ -21,7 +22,7 @@ export default function Header() {
   const [isMobile, setIsMobile] = useState(false);
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
-  const { lang, setLang, t } = useLanguage();
+  const { t, toggleLang, lang } = useLanguage();
 
   const router = useRouter();
 
@@ -94,170 +95,206 @@ export default function Header() {
           rel="stylesheet"
         />
       </Head>
+
       <header id="header" className={styles.header}>
-        <div className={styles.wrapper}>
-          <Container className={styles.container}>
-            <div className={styles.nav}>
-              <div className={styles.menuIconsLeft}>
-                <ul className={styles.iconList}>
-                  <li className={styles.hamMenu} onClick={toggleClass}>
-                    <RiMenu2Line />
-                  </li>
-                  {/* SEARCH ICON */}
-                  <li
-                    className={styles.searchIcon}
-                    onClick={() => setShowSearch((prev) => !prev)}
-                  >
-                    <IoSearch />
-                  </li>
+        <Container className={styles.inner}>
+          {/* LEFT: hamburger + search */}
+          <div className={styles.leftGroup}>
+            <button
+              type="button"
+              className={styles.iconBtn}
+              onClick={toggleClass}
+              aria-label="Open menu"
+            >
+              <RiMenu2Line />
+            </button>
 
-                  {/* SEARCH BAR */}
-                  {showSearch && (
-                    <div className={styles.searchBar}>
-                      {/* FORM */}
-                      <form onSubmit={handleSearch}>
-                        <input
-                          type="text"
-                          placeholder={t(
-                            "Search meat products...",
-                            "মাংসের পণ্য খুঁজুন...",
-                          )}
-                          value={search}
-                          onChange={(e) => setSearch(e.target.value)}
-                        />
+            <button
+              type="button"
+              className={styles.iconBtn}
+              onClick={() => setShowSearch((prev) => !prev)}
+              aria-label="Search"
+              aria-expanded={showSearch}
+            >
+              <IoSearch />
+            </button>
 
-                        <button type="submit">
-                          <IoSearch />
-                        </button>
-                      </form>
-
-                      {/* SUGGESTIONS */}
-                      {suggestions.length > 0 && (
-                        <div className={styles.suggestions}>
-                          {suggestions.map((item) => (
-                            <Link
-                              key={item.id}
-                              href={`/shop/${item.id}`}
-                              className={styles.suggestionItem}
-                              onClick={() => setShowSearch(false)}
-                            >
-                              {/* IMAGE */}
-                              <div className={styles.suggestionImage}>
-                                <NextImage
-                                  src={item.image}
-                                  alt={item.name}
-                                  className={styles.image}
-                                />
-                              </div>
-
-                              {/* CONTENT */}
-                              <div className={styles.suggestionContent}>
-                                <h4>{item.name}</h4>
-
-                                <p>${item.price.toFixed(2)}</p>
-                              </div>
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </ul>
-              </div>
-
-              <div
-                className={`${show ? styles.show : ""} ${styles.menuLeft} `}
-                onClick={toggleClass}
-              >
-                <div className={styles.menuTitle}>
-                  <h4>{t("Menu", "মেনু")}</h4>
-                  <div className={styles.crossIcon}>
-                    <FaXmark />
-                  </div>
-                </div>
-                <ul className={` ${styles.menuList}`}>
-                  {(isMobile ? navItems : navItems.slice(0, 2)).map((item) => {
-                    const isActive = pathname === item.href;
-
-                    return (
-                      <li
-                        key={item.href}
-                        className={styles.navItem}
-                        onClick={toggleClass}
-                      >
-                        <Link
-                          href={item.href}
-                          className={`${styles.navLink} ${
-                            isActive ? styles.active : ""
-                          }`}
-                        >
-                          {t(item.label, item.labelBn)}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-              <div className={styles.logo}>
-                <Link className={styles.navLink} href="/">
-                  <NextImage
-                    src={
-                      lang === "en" ? "/images/logo.jpg" : "/images/logo-bn.jpg"
-                    }
-                    alt={""}
-                  />
-                </Link>
-              </div>
-              <div className={styles.menuRight}>
-                <ul className={styles.menuList}>
-                  {navItems.slice(2, 4).map((item) => {
-                    const isActive = pathname === item.href;
-
-                    return (
-                      <li
-                        key={item.href}
-                        className={styles.navItem}
-                        onClick={toggleClass}
-                      >
-                        <Link
-                          href={item.href}
-                          className={`${styles.navLink} ${
-                            isActive ? styles.active : ""
-                          }`}
-                        >
-                          {t(item.label, item.labelBn)}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-              <div className={styles.menuIcons}>
-                <ul className={styles.iconList}>
-                  <li>
-                    <FaRegUser />
-                  </li>
-                  <li className={styles.wishlistItem}>
-                    <Link href="/wishlist">
-                      <FaRegHeart />
-
-                      {wishlist.length > 0 && (
-                        <span className={styles.badge}>{wishlist.length}</span>
-                      )}
-                    </Link>
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => setLang(lang === "en" ? "bn" : "en")}
-                      className={styles.langBtn}
+            {/* DESKTOP NAV — LEFT SIDE OF LOGO */}
+            {!isMobile && (
+              <nav className={styles.navInline}>
+                {navItems.slice(0, 2).map((item) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`${styles.navLink} ${isActive ? styles.active : ""}`}
                     >
-                      {lang === "en" ? "বাংলা" : "English"}
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </Container>
+                      {t(item.label, item.labelBn)}
+                    </Link>
+                  );
+                })}
+              </nav>
+            )}
+          </div>
+
+          {/* CENTER: logo */}
+          <Link className={styles.logo} href="/">
+            <NextImage
+              src={lang === "en" ? "/images/logo.jpg" : "/images/logo-bn.jpg"}
+              alt="Koshaix"
+            />
+          </Link>
+
+          {/* RIGHT: nav + icons */}
+          <div className={styles.rightGroup}>
+            {!isMobile && (
+              <nav className={styles.navInline}>
+                {navItems.slice(2, 4).map((item) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`${styles.navLink} ${isActive ? styles.active : ""}`}
+                    >
+                      {t(item.label, item.labelBn)}
+                    </Link>
+                  );
+                })}
+              </nav>
+            )}
+
+            <ul className={styles.iconList}>
+              <li>
+                <button
+                  type="button"
+                  className={styles.iconBtn}
+                  aria-label="Account"
+                >
+                  <FaRegUser />
+                </button>
+              </li>
+              <li>
+                <Link href="/wishlist" className={styles.iconBtn}>
+                  <FaRegHeart />
+                  {wishlist.length > 0 && (
+                    <span className={styles.badge}>{wishlist.length}</span>
+                  )}
+                </Link>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  className={styles.langToggle}
+                  onClick={toggleLang}
+                  aria-label="Switch language"
+                >
+                  <span className={lang === "en" ? styles.langActive : ""}>
+                    EN
+                  </span>
+                  <span className={styles.langDivider}>/</span>
+                  <span className={lang === "bn" ? styles.langActive : ""}>
+                    বাং
+                  </span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </Container>
+
+        {/* SEARCH OVERLAY */}
+        {showSearch && (
+          <div className={styles.searchOverlay}>
+            <Container>
+              <form className={styles.searchForm} onSubmit={handleSearch}>
+                <IoSearch className={styles.searchFormIcon} />
+                <input
+                  type="text"
+                  autoFocus
+                  placeholder={t(
+                    "Search meat products...",
+                    "মাংসের পণ্য খুঁজুন...",
+                  )}
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                <button type="submit" className={styles.searchSubmit}>
+                  {t("Search", "খুঁজুন")}
+                </button>
+                <button
+                  type="button"
+                  className={styles.searchClose}
+                  onClick={() => setShowSearch(false)}
+                  aria-label="Close search"
+                >
+                  <FaXmark />
+                </button>
+              </form>
+
+              {suggestions.length > 0 && (
+                <div className={styles.suggestions}>
+                  {suggestions.map((item) => (
+                    <Link
+                      key={item.id}
+                      href={`/shop/${item.id}`}
+                      className={styles.suggestionItem}
+                      onClick={() => setShowSearch(false)}
+                    >
+                      <div className={styles.suggestionImage}>
+                        <NextImage
+                          src={item.image}
+                          alt={item.name}
+                          className={styles.image}
+                        />
+                      </div>
+                      <div className={styles.suggestionContent}>
+                        <h4>{item.name}</h4>
+                        <p>${item.price.toFixed(2)}</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </Container>
+          </div>
+        )}
+
+        {/* MOBILE DRAWER */}
+        <div
+          className={styles.drawerOverlay}
+          data-open={show}
+          onClick={toggleClass}
+        />
+        <div
+          className={`${styles.mobileDrawer} ${show ? styles.mobileDrawerOpen : ""}`}
+        >
+          <div className={styles.drawerHead}>
+            <h4>{t("Menu", "মেনু")}</h4>
+            <button
+              type="button"
+              className={styles.crossIcon}
+              onClick={toggleClass}
+              aria-label="Close menu"
+            >
+              <FaXmark />
+            </button>
+          </div>
+          <ul className={styles.drawerList}>
+            {navItems.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <li key={item.href} onClick={toggleClass}>
+                  <Link
+                    href={item.href}
+                    className={`${styles.drawerLink} ${isActive ? styles.active : ""}`}
+                  >
+                    {t(item.label, item.labelBn)}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </header>
     </>

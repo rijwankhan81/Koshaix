@@ -1,0 +1,79 @@
+@import "../../styles/var";
+@import "../../styles/common";
+
+// -------- NEWSLETTER STRIP --------
+.newsletterStrip {
+    background: $primary-dark;
+    padding-block: $space-6;
+}
+
+.newsletterInner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-6;
+    flex-wrap: wrap;
+
+    h3 {
+        color: $white;
+        font-size: $fs-lg;
+        margin-bottom: $space-1;
+    }
+
+    p {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: $fs-sm;
+    }
+}
+
+.newsletterForm {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    background: $white;
+    border-radius: $radius-pill;
+    padding: $space-2;
+    min-width: 340px;
+    flex-shrink: 0;
+
+    @include mq-down(sm) {
+        min-width: 100%;
+    }
+
+    input {
+        flex: 1;
+        border: none;
+        outline: none;
+        font-size: $fs-sm;
+        font-family: $font_one;
+        color: $text-dark;
+        padding-left: $space-2;
+
+        &::placeholder {
+            color: $gray-500;
+        }
+    }
+
+    button {
+        background: $secondary;
+        color: $white;
+        border: none;
+        padding: $space-2 $space-5;
+        border-radius: $radius-pill;
+        font-size: $fs-sm;
+        font-weight: $fw-semibold;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: $transition-fast;
+
+        &:hover {
+            background: $secondary-light;
+        }
+    }
+}
+
+.mailIcon {
+    color: $gray-400;
+    margin-left: $space-2;
+    flex-shrink: 0;
+}
