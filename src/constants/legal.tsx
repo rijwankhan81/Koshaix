@@ -1,6 +1,6 @@
 export const legalItems = [
   { label: "Wishlist", labelBn: "ইচ্ছা তালিকা", href: "/wishlist" },
-  { label: "My account", labelBn: "আমার অ্যাকাউন্ট", href: "/privacy-policy" },
+  { label: "My account", labelBn: "আমার অ্যাকাউন্ট", href: "/my-account" },
   {
     label: "Privacy Policy",
     labelBn: "গোপনীয়তা নীতি",

@@ -99,7 +99,7 @@ export default function Footer() {
 
           {/* ABOUT */}
           <div className={styles.footer_menu}>
-            <h3>{t("About Us", "আমাদের সম্পর্কে")}</h3>
+            <h3>{t("Company", "কোম্পানি")}</h3>
             <ul>
               {navItems.map((item) => {
                 const isActive = pathname === item.href;

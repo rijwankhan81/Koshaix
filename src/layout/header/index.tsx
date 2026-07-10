@@ -79,21 +79,6 @@ export default function Header() {
           name="description"
           content="Premium Quality Meat, Poultry, Fish, and Seafood in Dubai. Freshness Guaranteed. Order Online for Delivery or Pickup. Your Trusted Source for High-Quality Meat Products."
         />
-        <link rel="icon" href="/images/fav.png" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Vast+Shadow&display=swap"
-          rel="stylesheet"
-        />
       </Head>
 
       <header id="header" className={styles.header}>
@@ -167,13 +152,9 @@ export default function Header() {
 
             <ul className={styles.iconList}>
               <li>
-                <button
-                  type="button"
-                  className={styles.iconBtn}
-                  aria-label="Account"
-                >
+                <Link href="/form/login" className={styles.iconBtn}>
                   <FaRegUser />
-                </button>
+                </Link>
               </li>
               <li>
                 <Link href="/wishlist" className={styles.iconBtn}>

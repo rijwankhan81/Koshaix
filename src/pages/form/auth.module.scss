@@ -1,0 +1,288 @@
+@import "../../styles/var";
+@import "../../styles/common";
+
+.main {
+    background: $bg-subtle;
+}
+
+.authSection {
+    padding-block: $space-9;
+
+    @include mq-down(md) {
+        padding-block: $space-6;
+    }
+}
+
+.authContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    width: 100%;
+    max-width: 460px;
+    background: $white;
+    border-radius: $radius-md;
+    box-shadow: $shadow-md;
+    padding: $space-7;
+
+    @include mq-down(sm) {
+        padding: $space-5;
+        box-shadow: none;
+        border: 1px solid $border-color;
+    }
+}
+
+.head {
+    text-align: center;
+    margin-bottom: $space-6;
+
+    h1 {
+        font-size: $fs-xl;
+        color: $text-dark;
+        margin-bottom: $space-2;
+    }
+
+    p {
+        font-size: $fs-sm;
+        color: $text-muted;
+    }
+}
+
+.eyebrow {
+    display: block;
+    font-size: $fs-xs;
+    font-weight: $fw-semibold;
+    letter-spacing: $ls-wider;
+    text-transform: uppercase;
+    color: $primary;
+    margin-bottom: $space-2;
+}
+
+// -------- GOOGLE BUTTON --------
+.googleBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-3;
+    width: 100%;
+    background: $white;
+    border: 1.5px solid $border-color;
+    border-radius: $radius-sm;
+    padding: $space-3;
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: $text-dark;
+    cursor: pointer;
+    transition: $transition-fast;
+
+    svg {
+        font-size: $fs-lg;
+    }
+
+    &:hover {
+        border-color: $gray-400;
+        background: $gray-100;
+    }
+}
+
+// -------- DIVIDER --------
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-block: $space-5;
+    color: $text-muted;
+    font-size: $fs-xs;
+    text-transform: uppercase;
+    letter-spacing: $ls-wide;
+
+    &::before,
+    &::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: $border-color;
+    }
+
+    span {
+        padding-inline: $space-3;
+    }
+}
+
+// -------- FORM --------
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-4;
+
+    @include mq-down(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+
+    label {
+        font-size: $fs-xs;
+        font-weight: $fw-semibold;
+        letter-spacing: $ls-wide;
+        text-transform: uppercase;
+        color: $text-muted;
+    }
+
+    input {
+        border: 1.5px solid $border-color;
+        border-radius: $radius-sm;
+        padding: $space-3 $space-4;
+        font-size: $fs-sm;
+        font-family: $font_one;
+        color: $text-dark;
+        outline: none;
+        transition: $transition-fast;
+        width: 100%;
+
+        &::placeholder {
+            color: $gray-500;
+        }
+
+        &:focus {
+            border-color: $primary;
+        }
+    }
+}
+
+.labelRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.forgotLink {
+    font-size: $fs-xs;
+    color: $primary;
+    font-weight: $fw-medium;
+    text-transform: none;
+    letter-spacing: normal;
+
+    &:hover {
+        color: $primary-dark;
+    }
+}
+
+.passwordField {
+    position: relative;
+
+    input {
+        padding-right: $space-8;
+    }
+}
+
+.eyeBtn {
+    position: absolute;
+    top: 50%;
+    right: $space-3;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: $gray-500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+        color: $text-dark;
+    }
+}
+
+// -------- CHECKBOX --------
+.checkboxRow {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-3;
+    cursor: pointer;
+    font-size: $fs-xs;
+    color: $text-muted;
+    line-height: $lh-base;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    a {
+        color: $primary;
+        font-weight: $fw-medium;
+    }
+}
+
+.checkboxBox {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    border: 1.5px solid $border-color;
+    border-radius: 4px;
+    position: relative;
+    transition: $transition-fast;
+
+    .checkboxRow input:checked+& {
+        background: $primary;
+        border-color: $primary;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 1px;
+            width: 5px;
+            height: 9px;
+            border: solid $white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    }
+}
+
+// -------- SUBMIT / ERROR --------
+.submitBtn {
+    @include btn-primary;
+    width: 100%;
+    padding-block: $space-3;
+    margin-top: $space-2;
+}
+
+.errorMsg {
+    background: $primary-tint;
+    color: $primary-dark;
+    font-size: $fs-sm;
+    padding: $space-3 $space-4;
+    border-radius: $radius-sm;
+}
+
+.switchText {
+    text-align: center;
+    font-size: $fs-sm;
+    color: $text-muted;
+    margin-top: $space-6;
+
+    a {
+        color: $primary;
+        font-weight: $fw-semibold;
+
+        &:hover {
+            color: $primary-dark;
+        }
+    }
+}

@@ -3,4 +3,9 @@ export const navItems = [
   { label: "Shop", labelBn: "কিনুন", href: "/shop" },
   { label: "Blog", labelBn: "ব্লগ", href: "/blog" },
   { label: "Contact", labelBn: "যোগাযোগ", href: "/contact" },
+  {
+    label: "List Your Shop",
+    labelBn: "আপনার দোকান তালিকা করুন",
+    href: "/for-sellers",
+  },
 ];

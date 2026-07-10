@@ -1,0 +1,391 @@
+@import "../../styles/var";
+@import "../../styles/common";
+
+
+.main {
+    background: $bg-light;
+}
+
+// -------- BANNER --------
+.banner {
+    background: $secondary-dark;
+    color: $white;
+    padding-block: $space-8;
+
+    @include mq-down(md) {
+        padding-block: $space-6;
+    }
+
+    h1 {
+        color: $white;
+        font-size: $fs-3xl;
+        max-width: 640px;
+        margin-bottom: $space-3;
+
+        @include mq-down(md) {
+            font-size: $fs-2xl;
+        }
+    }
+
+    p {
+        color: rgba(255, 255, 255, 0.65);
+        max-width: 560px;
+        font-size: $fs-sm;
+    }
+}
+
+.breadcrumb {
+    display: inline-block;
+    font-size: $fs-xs;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: $ls-wide;
+    margin-bottom: $space-4;
+
+    span {
+        color: $primary-light;
+        margin-inline: $space-1;
+    }
+}
+
+.eyebrow {
+    display: block;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    letter-spacing: $ls-wider;
+    text-transform: uppercase;
+    color: $primary;
+    margin-bottom: $space-2;
+}
+
+// -------- BENEFITS --------
+.benefits {
+    padding-block: $space-9;
+
+    @include mq-down(md) {
+        padding-block: $space-7;
+    }
+}
+
+.benefitsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-5;
+
+    @include mq-down(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include mq-down(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.benefitCard {
+    text-align: center;
+    padding: $space-6 $space-4;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    transition: $transition-base;
+
+    &:hover {
+        border-color: $primary;
+        box-shadow: $shadow-sm;
+    }
+
+    h4 {
+        font-size: $fs-md;
+        color: $text-dark;
+        margin-bottom: $space-2;
+    }
+
+    p {
+        font-size: $fs-sm;
+        color: $text-muted;
+    }
+}
+
+.benefitIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: $primary-tint;
+    color: $primary;
+    font-size: $fs-lg;
+    margin-bottom: $space-4;
+}
+
+// -------- PROCESS --------
+.process {
+    background: $bg-subtle;
+    padding-block: $space-9;
+
+    @include mq-down(md) {
+        padding-block: $space-7;
+    }
+}
+
+.head {
+    text-align: center;
+    margin-bottom: $space-8;
+
+    h2 {
+        font-size: $fs-2xl;
+        color: $text-dark;
+    }
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-7;
+
+    @include mq-down(md) {
+        grid-template-columns: 1fr;
+        gap: $space-8;
+    }
+}
+
+.step {
+    position: relative;
+    text-align: center;
+    padding-inline: $space-4;
+
+    h4 {
+        font-size: $fs-lg;
+        color: $text-dark;
+        margin-bottom: $space-2;
+    }
+
+    p {
+        font-size: $fs-sm;
+        color: $text-muted;
+    }
+}
+
+.stepNum {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: $secondary;
+    color: $primary-light;
+    font-size: $fs-lg;
+    font-weight: $fw-bold;
+    margin-bottom: $space-4;
+}
+
+.connector {
+    display: none;
+
+    @include mq-up(md) {
+        display: block;
+        position: absolute;
+        top: 28px;
+        left: calc(50% + 45px);
+        width: calc(100% - 90px);
+        height: 2px;
+        background: repeating-linear-gradient(to right,
+                $gray-400 0,
+                $gray-400 6px,
+                transparent 6px,
+                transparent 12px);
+    }
+}
+
+// -------- FORM --------
+.formSection {
+    padding-block: $space-9;
+
+    @include mq-down(md) {
+        padding-block: $space-7;
+    }
+}
+
+.formWrapper {
+    max-width: 640px;
+    margin-inline: auto;
+    background: $white;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    padding: $space-8;
+
+    @include mq-down(md) {
+        padding: $space-5;
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: $space-5;
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-5;
+
+    @include mq-down(sm) {
+        grid-template-columns: 1fr;
+        gap: $space-4;
+    }
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+
+    label {
+        font-size: $fs-xs;
+        font-weight: $fw-semibold;
+        letter-spacing: $ls-wide;
+        text-transform: uppercase;
+        color: $text-muted;
+    }
+
+    input,
+    select {
+        border: 1.5px solid $border-color;
+        border-radius: $radius-sm;
+        padding: $space-3 $space-4;
+        font-size: $fs-sm;
+        font-family: $font_one;
+        color: $text-dark;
+        outline: none;
+        transition: $transition-fast;
+        background: $white;
+
+        &::placeholder {
+            color: $gray-500;
+        }
+
+        &:focus {
+            border-color: $primary;
+        }
+    }
+}
+
+.submitBtn {
+    @include btn-primary;
+    width: 100%;
+    padding-block: $space-3;
+    margin-top: $space-2;
+}
+
+// -------- SHOP BANNER UPLOAD --------
+.fieldHint {
+    font-size: $fs-xs;
+    color: $text-muted;
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: $fw-regular;
+    margin-top: -2px;
+}
+
+.bannerDropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $space-2;
+    border: 1.5px dashed $border-color;
+    border-radius: $radius-md;
+    padding: $space-7 $space-4;
+    text-align: center;
+    cursor: pointer;
+    transition: $transition-fast;
+    color: $text-muted;
+
+    svg {
+        font-size: $fs-2xl;
+        color: $primary;
+        margin-bottom: $space-1;
+    }
+
+    span {
+        font-size: $fs-sm;
+        color: $text-dark;
+        font-weight: $fw-medium;
+    }
+
+    &:hover {
+        border-color: $primary;
+        background: $primary-tint;
+    }
+}
+
+.bannerDropzoneHint {
+    font-size: $fs-xs !important;
+    color: $text-muted !important;
+    font-weight: $fw-regular !important;
+}
+
+.bannerPreview {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 1;
+    border-radius: $radius-md;
+    overflow: hidden;
+    border: 1.5px solid $border-color;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.bannerRemoveBtn {
+    position: absolute;
+    top: $space-2;
+    right: $space-2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    color: $white;
+    border: none;
+    cursor: pointer;
+    transition: $transition-fast;
+
+    &:hover {
+        background: $primary;
+    }
+}
+
+// -------- SUCCESS STATE --------
+.successBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-block: $space-6;
+
+    svg {
+        font-size: $fs-4xl;
+        color: $success;
+        margin-bottom: $space-4;
+    }
+
+    h3 {
+        font-size: $fs-xl;
+        color: $text-dark;
+        margin-bottom: $space-2;
+    }
+
+    p {
+        font-size: $fs-sm;
+        color: $text-muted;
+        max-width: 400px;
+    }
+}
