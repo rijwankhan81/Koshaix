@@ -20,22 +20,35 @@ export default function Home() {
     .sort((a, b) => a.price - b.price);
 
   const { t, lang } = useLanguage();
+
   return (
     <>
       <Head>
-        <title>{t("Koshaix", "কোশাইক্স")}</title>
+        <title>
+          {t(
+            "Koshaix — Fresh Meat, Connected Locally",
+            "কোশাইক্স — তাজা মাংস, স্থানীয়ভাবে সংযুক্ত",
+          )}
+        </title>
+        <meta
+          name="description"
+          content={t(
+            "Premium quality fresh meat and ready-to-cook solutions, connected to trusted local shops.",
+            "প্রিমিয়াম মানের তাজা মাংস এবং রেডি-টু-কুক সমাধান, বিশ্বস্ত স্থানীয় দোকানের সাথে সংযুক্ত।",
+          )}
+        />
       </Head>
+
       <Header />
+
       <main className={styles.main}>
+        {/* HERO BANNER */}
         <section className={styles.banner}>
           <Swiper
             modules={[EffectFade, Autoplay]}
             effect="fade"
             fadeEffect={{ crossFade: true }}
-            autoplay={{
-              delay: 4000,
-              disableOnInteraction: false,
-            }}
+            autoplay={{ delay: 4000, disableOnInteraction: false }}
             pagination={{ clickable: true }}
             loop={true}
             speed={1200}
@@ -43,131 +56,151 @@ export default function Home() {
           >
             <SwiperSlide>
               <div className={styles.slide}>
-                <NextImage src={"/images/hmb-1.webp"} alt={""} />
-                <div className={styles.content}>
+                <NextImage
+                  src="/images/hmb-1.webp"
+                  alt=""
+                  className={styles.slideImage}
+                />
+                <div className={styles.slideOverlay} />
+                <Container className={styles.content}>
+                  <span className={styles.eyebrow}>
+                    {t("PREMIUM MEAT", "প্রিমিয়াম মাংস")}
+                  </span>
                   <h1>
                     {t("Best Choice for Fresh Meat", "তাজা মাংসের সেরা পছন্দ")}
                   </h1>
-                  <h2>{t("PREMIUM MEAT", "প্রিমিয়াম মাংস")}</h2>
                   <ul className={styles.tag}>
                     <li>{t("Fresh", "তাজা")}</li>
                     <li>{t("Hygienic", "হাইজিনিক")}</li>
                     <li>{t("Trusted", "বিশ্বস্ত")}</li>
                   </ul>
-                </div>
+                  <Link href="/shop" className={styles.heroBtn}>
+                    {t("Shop Now", "এখনই কিনুন")}
+                  </Link>
+                </Container>
               </div>
             </SwiperSlide>
 
             <SwiperSlide>
               <div className={styles.slide}>
-                <NextImage src={"/images/hmb-2.webp"} alt={""} />
-                <div className={styles.content}>
-                  <h1>{t("Straight From Farm", "ফাম থেকে সরাসরি")}</h1>
-                  <h2>{t("FRESH CUTS", "তাজা কাট")}</h2>
+                <NextImage
+                  src="/images/hmb-2.webp"
+                  alt=""
+                  className={styles.slideImage}
+                />
+                <div className={styles.slideOverlay} />
+                <Container className={styles.content}>
+                  <span className={styles.eyebrow}>
+                    {t("FRESH CUTS", "তাজা কাট")}
+                  </span>
+                  <h1>{t("Straight From Farm", "ফার্ম থেকে সরাসরি")}</h1>
                   <ul className={styles.tag}>
                     <li>{t("Juicy", "স্বাদু")}</li>
                     <li>{t("Tender", "নরম")}</li>
-                    <li>{t("Delicious", "সুস্বাদ")}</li>
+                    <li>{t("Delicious", "সুস্বাদু")}</li>
                   </ul>
-                </div>
+                  <Link href="/shop" className={styles.heroBtn}>
+                    {t("Shop Now", "এখনই কিনুন")}
+                  </Link>
+                </Container>
               </div>
             </SwiperSlide>
           </Swiper>
         </section>
-        {/* <Hero />
-        <CategoryGrid />
-        <NearbyShops /> */}
+
+        {/* CATEGORY SLIDER */}
         <section className={styles.itemslist}>
+          <Container>
+            <div className={styles.sectionHead}>
+              <span className={styles.eyebrowDark}>
+                {t("Browse", "ব্রাউজ করুন")}
+              </span>
+              <h2>{t("Shop By Category", "ক্যাটাগরি অনুযায়ী কিনুন")}</h2>
+            </div>
+          </Container>
+
           <Swiper
-            modules={[EffectFade, Autoplay]}
-            slidesPerView={6}
-            fadeEffect={{ crossFade: true }}
-            autoplay={{
-              delay: 4000,
-              disableOnInteraction: false,
-            }}
-            pagination={{ clickable: true }}
+            modules={[Autoplay]}
+            autoplay={{ delay: 4000, disableOnInteraction: false }}
             loop={true}
             speed={800}
-            className={styles.swiper}
+            spaceBetween={20}
+            className={styles.categorySwiper}
             breakpoints={{
-              0: {
-                slidesPerView: 1.2,
-              },
-              480: {
-                slidesPerView: 2,
-              },
-              768: {
-                slidesPerView: 3,
-              },
-              1024: {
-                slidesPerView: 4,
-              },
-              1280: {
-                slidesPerView: 5,
-              },
-              1440: {
-                slidesPerView: 6,
-              },
+              0: { slidesPerView: 1.4 },
+              480: { slidesPerView: 2.2 },
+              768: { slidesPerView: 3.2 },
+              1024: { slidesPerView: 4.2 },
+              1280: { slidesPerView: 5.2 },
+              1440: { slidesPerView: 6 },
             }}
           >
             {meatCategories.map((item) => (
-              <SwiperSlide>
-                <div className={styles.slide} key={item.id}>
-                  <NextImage src={item.image} alt={item.label} />
-                  <div className={styles.content}>
-                    <h2>{t(item.label, item.labelBn)}</h2>
-                    <Link href={`/shop?category=${item.label}`}>
-                      {t("Shop Now", "এখনই কিনুন")}
-                    </Link>
+              <SwiperSlide key={item.id}>
+                <Link
+                  href={`/shop?category=${item.label}`}
+                  className={styles.catSlide}
+                >
+                  <NextImage
+                    src={item.image}
+                    alt={item.label}
+                    className={styles.catImage}
+                  />
+                  <span className={styles.catCut} aria-hidden="true" />
+                  <div className={styles.catContent}>
+                    <h3>{t(item.label, item.labelBn)}</h3>
+                    <span className={styles.catCta}>
+                      {t("Shop Now →", "এখনই কিনুন →")}
+                    </span>
                   </div>
-                </div>
+                </Link>
               </SwiperSlide>
             ))}
           </Swiper>
         </section>
+
+        {/* WELCOME */}
         <section className={styles.welcome}>
-          <div className={styles.wrap}>
-            <Container>
-              <div className={styles.rowWrapper}>
-                <div className={styles.row}>
-                  <div className={styles.image}>
-                    <NextImage src={"/images/image1.jpg"} alt={""} />
-                  </div>
-                  <div className={styles.content}>
-                    <div className={styles.icon}>
-                      <NextImage
-                        src={
-                          lang === "en"
-                            ? "/images/logo.jpg"
-                            : "/images/logo-bn.jpg"
-                        }
-                        alt="Koshaix"
-                      />
-                    </div>
-                    <h2>
-                      {t(
-                        "The Premier Meat Experience",
-                        "প্রিমিয়াম মাংস অভিজ্ঞতা",
-                      )}
-                    </h2>
-                    <h3>{t("WELCOME TO KOSHAIX", "কোশাইক্সে স্বাগতম")}</h3>
-                    <Divider />
-                    <p className={styles.desc}>
-                      {t(
-                        "Koshaix delivers the finest quality meat and ready-to-cook solutions through our seamless online platform. We proudly serve homes, restaurants, and businesses with fresh, hygienically processed meat sourced from trusted suppliers — ensuring unmatched quality, taste, and reliability.",
-                        "কোশাইক্স আমাদের সহজ অনলাইন প্ল্যাটফর্মের মাধ্যমে সবচেয়ে ভালো মাংস এবং প্রস্তুত খাবারের সমাধানগুলি প্রদান করে। আমরা বিশ্বস্ত সরবরাহকারীদের থেকে তাজা, জন্যভিত্তিকভাবে  processed মাংস সরবরাহ করি —অপময়তা, সুস্বাদ,এবং বিশ্বস্ততা।",
-                      )}
-                    </p>
-                  </div>
-                </div>
+          <Container>
+            <div className={styles.row}>
+              <div className={styles.image}>
+                <NextImage src="/images/image1.jpg" alt="Koshaix" />
+                <span className={styles.imageCut} aria-hidden="true" />
               </div>
-            </Container>
-          </div>
+              <div className={styles.content}>
+                <div className={styles.icon}>
+                  <NextImage
+                    src={
+                      lang === "en" ? "/images/logo.jpg" : "/images/logo-bn.jpg"
+                    }
+                    alt="Koshaix"
+                  />
+                </div>
+                <span className={styles.eyebrowDark}>
+                  {t("WELCOME TO KOSHAIX", "কোশাইক্সে স্বাগতম")}
+                </span>
+                <h2>
+                  {t("The Premier Meat Experience", "প্রিমিয়াম মাংস অভিজ্ঞতা")}
+                </h2>
+                <Divider />
+                <p className={styles.desc}>
+                  {t(
+                    "Koshaix delivers the finest quality meat and ready-to-cook solutions through our seamless online platform. We proudly serve homes, restaurants, and businesses with fresh, hygienically processed meat sourced from trusted suppliers — ensuring unmatched quality, taste, and reliability.",
+                    "কোশাইক্স আমাদের সহজ অনলাইন প্ল্যাটফর্মের মাধ্যমে সর্বোচ্চ মানের মাংস এবং রেডি-টু-কুক সমাধান সরবরাহ করে। আমরা বিশ্বস্ত সরবরাহকারীদের কাছ থেকে সংগৃহীত তাজা, স্বাস্থ্যসম্মতভাবে প্রক্রিয়াজাত মাংস দিয়ে ঘর, রেস্তোরাঁ ও ব্যবসাকে সেবা দিতে গর্বিত — অতুলনীয় মান, স্বাদ ও নির্ভরযোগ্যতার নিশ্চয়তাসহ।",
+                  )}
+                </p>
+              </div>
+            </div>
+          </Container>
         </section>
+
+        {/* PRODUCTS */}
         <section className={styles.products}>
           <Container>
             <div className={styles.head}>
+              <span className={styles.eyebrowDark}>
+                {t("Handpicked", "বাছাইকৃত")}
+              </span>
               <h2>{t("Fresh Picks for You", "আপনার জন্য তাজা পিক")}</h2>
               <h3>
                 {t(
@@ -184,9 +217,11 @@ export default function Home() {
             </div>
           </Container>
         </section>
+
         <Choose />
         <Newsletter />
       </main>
+
       <Footer />
     </>
   );

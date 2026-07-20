@@ -43,8 +43,9 @@ $danger: $primary;
 $overlay: rgba(0, 0, 0, 0.6);
 
 // -------- TYPOGRAPHY --------
-$font_one: "Golos Text", sans-serif; // primary UI / body font
-$font_two: "Vast Shadow", serif; // display / stylized accents (use sparingly)
+$font_one: "Inter", sans-serif; // primary UI / body font
+$font_two: "Oswald", sans-serif; // display / headline / stylized accents (use sparingly)
+
 
 $fs-xs: 0.75rem; // 12px
 $fs-sm: 0.875rem; // 14px

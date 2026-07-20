@@ -137,6 +137,10 @@
     border: none;
     cursor: pointer;
     transition: $transition-base;
+
+    @include mq-down(sm) {
+        padding: $space-3 $space-4;
+    }
 }
 
 @mixin btn-primary {
